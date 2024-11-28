@@ -19,7 +19,12 @@
         <TextField fx:id="txt_staffname" layoutX="245.0" layoutY="21.0" />
         <Label layoutX="245.0" layoutY="4.0" text="Nhân viên" />
         <Label layoutX="569.0" layoutY="6.0" text="Thời gian" />
-
+        <TextField fx:id="txt_time" layoutX="569.0" layoutY="22.0" />
+        <TextField fx:id="txt_version" layoutX="787.0" layoutY="22.0" prefHeight="26.0" prefWidth="91.0" />
+        <Label layoutX="833.0" layoutY="5.0" text="Version" />
+        <Label layoutX="428.0" layoutY="5.0" text="Mã POS" />
+        <TextField fx:id="txt_poscode" layoutX="428.0" layoutY="21.0" prefHeight="26.0" prefWidth="101.0" />
+        
     </children>
 
 

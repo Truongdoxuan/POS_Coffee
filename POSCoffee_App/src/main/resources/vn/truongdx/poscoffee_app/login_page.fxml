@@ -21,5 +21,7 @@
         <TextField fx:id="txt_maCH" layoutX="194.0" layoutY="163.0" prefHeight="26.0" prefWidth="228.0" />
         <TextField fx:id="txt_matkhau" layoutX="194.0" layoutY="242.0" prefHeight="26.0" prefWidth="228.0" />
         <Label layoutX="113.0" layoutY="166.0" text="Mã số CH" textFill="#0eae41" />
+        <Label layoutX="114.0" layoutY="246.0" text="Mật khẩu" textFill="#0eae41" />
+        <Button fx:id="btn_login" layoutX="260.0" layoutY="316.0" mnemonicParsing="false" onAction="#Login" text="Đăng nhập" textFill="#10ad42" />
     </children>
 </AnchorPane>

@@ -1,15 +1,21 @@
 package vn.truongdx.poscoffee_app.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Order_Controller {
   //khai báo biến
@@ -19,11 +25,39 @@ public class Order_Controller {
   TextField txt_searchItem;
   @FXML
   Button btn_orther, btn_topingsize;
+  @FXML
+  ListView<String> lv_sanpham;
+  //tạo ds rỗng lưu trữ sp dưới dạng String
+  ObservableList<String> sanphamList = FXCollections.observableArrayList();
 
   //hàm thực hiện chương trình
+  //kết nối database
+  Connection connect = DatabaseConnection.getConnection("posdatabase","root","");
+
+  //lấy list sản phẩm trong menu từ database về tableview
+  private ObservableList<String> getSanPhamFromDataBase() {
+    String sql = "SELECT stt, tensp FROM danhmucsp";
+    try (Connection conn = connect;
+         PreparedStatement prepared = conn.prepareStatement(sql);
+         ResultSet rs = prepared.executeQuery()) {
+      while (rs.next()) {
+        int stt = rs.getInt("stt");
+        String tenSanPham = rs.getString("tensp");
+        String Menu = "\t" + tenSanPham;
+        sanphamList.add(Menu);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return sanphamList;
+  }
   //hàm khởi chạy màn hình trước khi thực hiện chức năng
   @FXML
   public void initialize() {
+    //đặt dữ liệu từ csdl vào listview
+    sanphamList = getSanPhamFromDataBase();
+    lv_sanpham.setItems(sanphamList);
+
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");
     txt_version.setText("V1.0.0");

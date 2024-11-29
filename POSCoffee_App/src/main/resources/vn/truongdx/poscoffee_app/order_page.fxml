@@ -49,7 +49,15 @@
         </GridPane>
         <Button fx:id="btn_pay" layoutX="766.0" layoutY="444.0" mnemonicParsing="false" onAction="#pay_Bill" prefHeight="218.0" prefWidth="114.0" text="Thanh toán" />
         <ListView fx:id="lv_sanpham" layoutX="331.0" layoutY="99.0" prefHeight="337.0" prefWidth="550.0" />
-
+        <VBox fx:id="vb_tinhbill" layoutX="16.0" layoutY="446.0" prefHeight="235.0" prefWidth="300.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="274.0">
+                    <Label text="Đơn hàng"/>
+                    <Region prefHeight="100.0" prefWidth="274.0"/>
+                    <Label fx:id="lb_orderitems" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="PL001" textAlignment="RIGHT" />
+                </HBox>
+            </children>
+        </VBox>
     </children>
 
 

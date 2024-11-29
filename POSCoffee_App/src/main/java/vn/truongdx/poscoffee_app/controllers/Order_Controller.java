@@ -1,9 +1,8 @@
-package vn.truongdx.poscoffee_app;
+package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class Order_Controller {

@@ -1,4 +1,4 @@
-package vn.truongdx.poscoffee_app;
+package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -24,7 +24,18 @@
         <Label layoutX="833.0" layoutY="5.0" text="Version" />
         <Label layoutX="428.0" layoutY="5.0" text="Mã POS" />
         <TextField fx:id="txt_poscode" layoutX="428.0" layoutY="21.0" prefHeight="26.0" prefWidth="101.0" />
-        
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.3999755859375" minWidth="10.0" prefWidth="148.19998779296876" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.3999938964844" minWidth="0.0" prefWidth="148.80001831054688" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.3999938964844" minWidth="10.0" prefWidth="127.19998168945312" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="78.60001220703126" minHeight="10.0" prefHeight="70.40001220703125" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="112.79998779296874" minHeight="10.0" prefHeight="95.2000244140625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="78.4" minHeight="10.0" prefHeight="75.9999755859375" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
     </children>
 
 

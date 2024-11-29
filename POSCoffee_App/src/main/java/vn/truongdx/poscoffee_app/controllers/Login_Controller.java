@@ -21,6 +21,7 @@ public class Login_Controller {
     //onclick button chuyển đến trang order
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(Login_Controller.class.getResource("order_page.fxml"));
+      System.out.println(Login_Controller.class.getResource("/fxml/order_page.fxml"));
       Parent root = fxmlLoader.load();
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       Scene scene = new Scene(root);

@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
 public class OrtherFunction_Controller {
   //khai báo biến
   @FXML
@@ -24,7 +22,7 @@ public class OrtherFunction_Controller {
   public void Logout(ActionEvent event) {
     try {
       //trở về trang login
-      FXMLLoader fxmlLoader = new FXMLLoader(OrtherFunction_Controller.class.getResource("login.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(OrtherFunction_Controller.class.getResource("/vn/truongdx/poscoffee_app/fxml/login_page.fxml"));
       Parent root = fxmlLoader.load();
       Stage loginStage = new Stage();
       loginStage.setScene(new Scene(root));

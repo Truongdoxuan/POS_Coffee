@@ -2,8 +2,14 @@ package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Order_Controller {
   //khai báo biến
@@ -35,7 +41,17 @@ public class Order_Controller {
 
   }
   //button mở modal các chức năng khác
-  public void orther_Functions(ActionEvent event) {
+  public void orther_Functions() {
+    //mở modal chức năng khác
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/ortherFunctions_page.fxml"));
+      Parent root = fxmlLoader.load();
+      Stage ortherSatge = new Stage();
+      ortherSatge.setScene(new Scene(root));
+      ortherSatge.showAndWait(); //thao tác only modal này đến khi được đóng lại
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
   }
   //báo cáo nhanh

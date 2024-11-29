@@ -31,7 +31,21 @@ public class Order_Controller {
   }
   //tìm kiếm sản phẩm
   public void search_Item(ActionEvent event) {
+
+  }
+  //ghi chú vào sản phẩm
+  public void note_Item(ActionEvent event) {
+
+  }
+  //bắt đầu ca làm việc
+  public void start_Day(ActionEvent event) {
+
+  }
+  public void start_workingShifts(ActionEvent event) {
+
+  }
+  //thay đổi kích cỡ sản phẩm, thêm toping
+  public void change_SizeToping(ActionEvent event) {
     
   }
-
 }

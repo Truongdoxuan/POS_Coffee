@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.repositories.EmployeeRepository;
+import vn.truongdx.poscoffee_app.repositories.EmployeeRepositoryImpl;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
 
 import java.io.IOException;
@@ -19,8 +21,12 @@ public class MainApplication extends Application {
   }
 
   public static void main(String[] args) {
-    launch();
+//    launch();
 //    Connection connection = DatabaseConnection.getConnection("posdatabase","root","");
 //    System.out.println(connection);
+    EmployeeRepositoryImpl emp = new EmployeeRepositoryImpl();
+    Connection connection = emp.getConnection();
+    if (connection != null) System.out.println("Connect success");
+    else System.out.println("Connect errol");
   }
 }

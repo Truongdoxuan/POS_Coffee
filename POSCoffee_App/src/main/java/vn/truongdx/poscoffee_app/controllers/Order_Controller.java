@@ -12,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -113,6 +115,16 @@ public class Order_Controller {
   }
   //thay đổi kích cỡ sản phẩm, thêm toping
   public void change_SizeToping(ActionEvent event) {
+    //mở modal
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
+      Parent root = fxmlLoader.load();
+      Stage modalStage = new Stage();
+      modalStage.setScene(new Scene(root));
+      modalStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 }

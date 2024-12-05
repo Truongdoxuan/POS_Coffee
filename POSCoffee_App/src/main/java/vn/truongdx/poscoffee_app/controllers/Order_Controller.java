@@ -31,6 +31,8 @@ public class Order_Controller {
   ListView<String> lv_sanpham;
   //tạo ds rỗng lưu trữ sp dưới dạng String
   ObservableList<String> sanphamList = FXCollections.observableArrayList();
+  //tạo ds lưu trữ các sản phẩm được lọc khi tìm kiếm
+  ObservableList<String> timkiemSanPham = FXCollections.observableArrayList();
 
   //hàm thực hiện chương trình
   //kết nối database
@@ -59,6 +61,9 @@ public class Order_Controller {
     //đặt dữ liệu từ csdl vào listview
     sanphamList = getSanPhamFromDataBase();
     lv_sanpham.setItems(sanphamList);
+
+    //thêm tất cả item sanpham vào mảng tìm kiếm
+    timkiemSanPham.addAll(sanphamList);
 
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");

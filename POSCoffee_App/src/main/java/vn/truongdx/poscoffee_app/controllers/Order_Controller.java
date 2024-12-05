@@ -1,5 +1,6 @@
 package vn.truongdx.poscoffee_app.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,10 +65,36 @@ public class Order_Controller {
 
     //thêm tất cả item sanpham vào mảng tìm kiếm
     timkiemSanPham.addAll(sanphamList);
+    //lắng nghe sự kiện khi thay đổi văn bản liên tục trong thanh search
+    Platform.runLater(() -> {
+      txt_searchItem.requestFocus(); //bắt đầu khi đặt trỏ chuột vào thanh search
+    });
+    txt_searchItem.textProperty().addListener((observable, oldValue, newValue) -> {
+      timkiemSP(newValue);
+    });
 
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");
     txt_version.setText("V1.0.0");
+  }
+
+  //hàm tìm kiếm sản phẩm
+  private void timkiemSP(String keyword) {
+    //xóa phần tử trong mảng đã lọc trc đó
+    timkiemSanPham.clear();
+    if (keyword.isEmpty()) { //nếu không tìm kiếm thì hiển thị all
+      timkiemSanPham.addAll(sanphamList);
+    }
+    else {
+      //dùng vòng lặp lọc các sp chứa keyword
+      for (String sp: sanphamList) {
+        if (sp.toLowerCase().contains(keyword.toLowerCase())) {
+          timkiemSanPham.add(sp);
+        }
+      }
+    }
+    //hiển thị lên list view các sp có từ khóa đó
+    lv_sanpham.setItems(timkiemSanPham);
   }
   //xóa sản phẩm khi đã thêm vào bill
   public void delete_Item(ActionEvent event) {

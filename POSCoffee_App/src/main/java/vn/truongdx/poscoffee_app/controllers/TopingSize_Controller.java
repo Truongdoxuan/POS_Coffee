@@ -4,6 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.models.entities.SanPham;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TopingSize_Controller {
   //khai báo biến
@@ -21,6 +25,7 @@ public class TopingSize_Controller {
   TextField tf_soluong;
   @FXML
   Button btn_close, btn_add, btn_cong, btn_tru;
+
 
   //chọn 1 radio duy nhất trong group đó
   ToggleGroup radioSize;
@@ -77,7 +82,38 @@ public class TopingSize_Controller {
   }
 
   public void addintoBill(ActionEvent event) {
+    //lấy checked của radio button size, đá, trà, ngọt v.v
+    RadioButton selectedSize = (RadioButton) radioSize.getSelectedToggle();
+    String size = selectedSize.getText();
 
+    RadioButton selectedDa = (RadioButton) radioDa.getSelectedToggle();
+    String luongDa = selectedDa.getText();
+
+    RadioButton selectedTra = (RadioButton) radioTra.getSelectedToggle();
+    String luongTra = selectedTra.getText();
+
+    RadioButton selectedNgot = (RadioButton) radioNgot.getSelectedToggle();
+    String luongNgot = selectedNgot.getText();
+
+    //lấy checked toppings nếu có
+    List<String> toppings = new ArrayList<>();
+    if (cb_thachdua.isSelected()) toppings.add("Thạch dừa");
+    if (cb_thachsocola.isSelected()) toppings.add("Thạch socola");
+    if (cb_tranchau.isSelected()) toppings.add("Trân châu");
+    if (cb_banhflan.isSelected()) toppings.add("Bánh flan");
+
+    //lấy số lượng
+    int soLuong = Integer.parseInt(tf_soluong.getText());
+
+    //tạo đối tượng sp mới
+    SanPham sanpham = new SanPham(size, toppings, luongDa, luongTra, luongNgot,soLuong);
+    Order_Controller orderController = getOrderController();
+    orderController.addintoTableView(sanpham);
+  }
+  //hàm giúp nhận ra cửa sổ chính
+  private Order_Controller getOrderController() {
+    Stage stage = (Stage) btn_add.getScene().getWindow();
+    return (Order_Controller) stage.getUserData();
   }
   public void closeModal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();

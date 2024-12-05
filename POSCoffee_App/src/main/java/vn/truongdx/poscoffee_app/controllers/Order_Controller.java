@@ -8,10 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
 
 import java.io.IOException;
@@ -30,11 +30,24 @@ public class Order_Controller {
   Button btn_orther, btn_topingsize;
   @FXML
   ListView<String> lv_sanpham;
+  @FXML
+  TableView<SanPham> tv_bill;
+  @FXML
+  TableColumn<SanPham, Integer> tc_stt;
+  @FXML
+  TableColumn<SanPham, String> tc_tensp;
+  @FXML
+  TableColumn<SanPham, Integer> tc_sl;
+  @FXML
+  TableColumn<SanPham, Double> tc_gia;
+
+
   //tạo ds rỗng lưu trữ sp dưới dạng String
   ObservableList<String> sanphamList = FXCollections.observableArrayList();
   //tạo ds lưu trữ các sản phẩm được lọc khi tìm kiếm
   ObservableList<String> timkiemSanPham = FXCollections.observableArrayList();
-
+  //tạo ds lưu trữ các sản phẩm được thêm vào bill để thanh toán
+  ObservableList<SanPham> billList = FXCollections.observableArrayList();
   //hàm thực hiện chương trình
   //kết nối database
   Connection connect = DatabaseConnection.getConnection("posdatabase","root","");
@@ -76,6 +89,15 @@ public class Order_Controller {
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");
     txt_version.setText("V1.0.0");
+
+    //thiết lập các cột table view
+    tc_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
+    tc_tensp.setCellValueFactory(data -> new)
+    tc_sl.setCellValueFactory(new PropertyValueFactory<>("soLuong"));
+    tc_gia.setCellValueFactory(new PropertyValueFactory<>("donGia"));
+
+
+    tv_bill.setItems(billList);
   }
 
   //hàm tìm kiếm sản phẩm
@@ -95,6 +117,11 @@ public class Order_Controller {
     }
     //hiển thị lên list view các sp có từ khóa đó
     lv_sanpham.setItems(timkiemSanPham);
+  }
+
+  //thêm sản phẩm vào bill
+  public void addToTableView(SanPham sanPham) {
+    tv_bill.getItems().add(sanPham);
   }
   //xóa sản phẩm khi đã thêm vào bill
   public void delete_Item(ActionEvent event) {

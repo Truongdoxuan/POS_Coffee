@@ -1,5 +1,7 @@
 package vn.truongdx.poscoffee_app.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -10,6 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopingSize_Controller {
+  //truyền đối tượng Order_controller
+  private Order_Controller orderController;
+
+  public void setOrderController(Order_Controller orderController) {
+    this.orderController = orderController;
+  }
+
   //khai báo biến
   @FXML
   RadioButton rd_sizeM, rd_sizeL;
@@ -105,15 +114,19 @@ public class TopingSize_Controller {
     //lấy số lượng
     int soLuong = Integer.parseInt(tf_soluong.getText());
 
-    //tạo đối tượng sp mới
-    SanPham sanpham = new SanPham(size, toppings, luongDa, luongTra, luongNgot,soLuong);
-    Order_Controller orderController = getOrderController();
-    orderController.addintoTableView(sanpham);
-  }
-  //hàm giúp nhận ra cửa sổ chính
-  private Order_Controller getOrderController() {
-    Stage stage = (Stage) btn_add.getScene().getWindow();
-    return (Order_Controller) stage.getUserData();
+    //lấy tên sp
+    String namesp = orderController.getNameSp();
+    if (orderController == null) {
+      System.out.println("OrderController is not initialized.");
+      return; // Dừng lại nếu không thể lấy orderController
+    }
+
+    //tạo đối tượng mới
+    ObservableList<String> observableToppings = FXCollections.observableArrayList(toppings);
+    SanPham selectedsanPham = new SanPham(namesp, size, observableToppings, luongDa, luongTra, luongNgot, soLuong);
+
+    orderController.billList.add(selectedsanPham);
+    closeModal(event);
   }
   public void closeModal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();

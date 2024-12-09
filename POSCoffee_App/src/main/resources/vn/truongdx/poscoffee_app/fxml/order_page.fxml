@@ -104,12 +104,12 @@
                 </HBox>
             </children>
         </VBox>
-        <TableView fx:id="tb_bill" layoutX="17.0" layoutY="68.0" prefHeight="368.0" prefWidth="300.0">
+        <TableView fx:id="tv_bill" layoutX="17.0" layoutY="68.0" prefHeight="368.0" prefWidth="300.0">
             <columns>
-                <TableColumn fx:id="tc_stt" prefWidth="29.600006103515625" text="STT" />
-                <TableColumn fx:id="tbcl_tensp" prefWidth="155.99999618530273" text="Tên sản phẩm" />
-                <TableColumn fx:id="tbcl_sluongsp" prefWidth="20.79998779296875" text="SL" />
-                <TableColumn fx:id="tbcl_giasp" prefWidth="96.00001525878906" text="Đơn giá" />
+<!--                <TableColumn fx:id="tc_stt" prefWidth="29.600006103515625" text="STT" />-->
+                <TableColumn fx:id="tc_tensp" prefWidth="156.0000057220459" text="Tên sản phẩm" />
+                <TableColumn fx:id="tc_sl" prefWidth="20.79998779296875" text="SL" />
+                <TableColumn fx:id="tc_gia" prefWidth="122.39999389648438" text="Đơn giá" />
             </columns>
         </TableView>
       <HBox layoutX="330.0" layoutY="67.0" prefHeight="26.0" prefWidth="550.0">

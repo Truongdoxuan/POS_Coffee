@@ -1,6 +1,8 @@
 package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,8 +34,6 @@ public class Order_Controller {
   ListView<String> lv_sanpham;
   @FXML
   TableView<SanPham> tv_bill;
-  @FXML
-  TableColumn<SanPham, Integer> tc_stt;
   @FXML
   TableColumn<SanPham, String> tc_tensp;
   @FXML
@@ -91,13 +91,20 @@ public class Order_Controller {
     txt_version.setText("V1.0.0");
 
     //thiết lập các cột table view
-    tc_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
-    tc_tensp.setCellValueFactory(data -> new)
-    tc_sl.setCellValueFactory(new PropertyValueFactory<>("soLuong"));
-    tc_gia.setCellValueFactory(new PropertyValueFactory<>("donGia"));
-
+    tc_tensp.setCellValueFactory(new PropertyValueFactory<>("tenSanPham"));
+    tc_sl.setCellValueFactory(new PropertyValueFactory<>("soluong"));
+//    tc_gia.setCellValueFactory(new PropertyValueFactory<>("donGia"));
 
     tv_bill.setItems(billList);
+
+    //chọn 1 sản phẩm từ list view
+    lv_sanpham.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue != null) {
+        System.out.println("Đã chọn: " + newValue);
+      } else {
+        System.out.println("Chưa chọn sản phẩm.");
+      }
+    });
   }
 
   //hàm tìm kiếm sản phẩm
@@ -119,9 +126,14 @@ public class Order_Controller {
     lv_sanpham.setItems(timkiemSanPham);
   }
 
+
   //thêm sản phẩm vào bill
-  public void addToTableView(SanPham sanPham) {
-    tv_bill.getItems().add(sanPham);
+  public void addToTableView(SanPham selectedSp) {
+    billList.add(selectedSp);
+  }
+  //lấy tên sản phẩm và giá sản phẩm
+  public String getNameSp() {
+    return null;
   }
   //xóa sản phẩm khi đã thêm vào bill
   public void delete_Item(ActionEvent event) {
@@ -178,9 +190,12 @@ public class Order_Controller {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
       Parent root = fxmlLoader.load();
+      TopingSize_Controller topingSizeController = fxmlLoader.getController();
+      topingSizeController.setOrderController(this);
       Stage modalStage = new Stage();
       modalStage.setScene(new Scene(root));
       modalStage.showAndWait();
+
     } catch (IOException e) {
       e.printStackTrace();
     }

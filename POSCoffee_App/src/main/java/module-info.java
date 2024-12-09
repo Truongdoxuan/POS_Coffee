@@ -9,4 +9,5 @@ module vn.truongdx.poscoffee_app {
   exports vn.truongdx.poscoffee_app;
   exports vn.truongdx.poscoffee_app.controllers;
   opens vn.truongdx.poscoffee_app.controllers to javafx.fxml;
+  opens vn.truongdx.poscoffee_app.models.entities to javafx.base;
 }

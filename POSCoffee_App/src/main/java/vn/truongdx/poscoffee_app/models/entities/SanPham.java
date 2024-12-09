@@ -1,79 +1,93 @@
 package vn.truongdx.poscoffee_app.models.entities;
 
-import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class SanPham {
-  private String size;
-  private List<String> topings;
-  private String da, tra, ngot;
-  private int soluong;
+  private SimpleStringProperty tenSanPham;
+  private SimpleStringProperty size;
+  private SimpleListProperty<String> topings; // Dùng SimpleListProperty
+  private SimpleStringProperty da, tra, ngot;
+  private SimpleIntegerProperty soluong;
 
-  public SanPham(String size, List<String> topings, String da, String tra, String ngot, int soluong) {
-    this.soluong = soluong;
-    this.size = size;
-    this.topings = topings;
-    this.da = da;
-    this.tra = tra;
-    this.ngot = ngot;
+  // Constructor
+  public SanPham(String tensanpham, String size, ObservableList<String> topings, String da, String tra, String ngot, int soluong) {
+    this.tenSanPham = new SimpleStringProperty(tensanpham);
+    this.size = new SimpleStringProperty(size);
+    this.topings = new SimpleListProperty<>(topings);
+    this.da = new SimpleStringProperty(da);
+    this.tra = new SimpleStringProperty(tra);
+    this.ngot = new SimpleStringProperty(ngot);
+    this.soluong = new SimpleIntegerProperty(soluong);
   }
 
-  public void setSoluong(int soluong) {
-    this.soluong = soluong;
+  public String getTenSanPham() {
+    return tenSanPham.get();
+  }
+
+  public void setTenSanPham(String tenSanPham) {
+    this.tenSanPham.set(tenSanPham);
   }
 
   public String getSize() {
-    return size;
+    return size.get();
   }
 
   public void setSize(String size) {
-    this.size = size;
+    this.size.set(size);
   }
 
-  public List<String> getTopings() {
-    return topings;
+  public ObservableList<String> getTopings() {
+    return topings.get();
   }
 
-  public void setTopings(List<String> topings) {
-    this.topings = topings;
+  public void setTopings(ObservableList<String> topings) {
+    this.topings.setAll(topings);
   }
 
   public String getDa() {
-    return da;
+    return da.get();
   }
 
   public void setDa(String da) {
-    this.da = da;
+    this.da.set(da);
   }
 
   public String getTra() {
-    return tra;
+    return tra.get();
   }
 
   public void setTra(String tra) {
-    this.tra = tra;
+    this.tra.set(tra);
   }
 
   public String getNgot() {
-    return ngot;
+    return ngot.get();
   }
 
   public void setNgot(String ngot) {
-    this.ngot = ngot;
+    this.ngot.set(ngot);
   }
 
   public int getSoluong() {
-    return soluong;
+    return soluong.get();
   }
 
-  //in thông tin vào cột tên sản phẩm
+  public void setSoluong(int soluong) {
+    this.soluong.set(soluong);
+  }
+
   public String infoSP() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(size).append("\n");
-    stringBuilder.append("Đá: ").append(da).append("\n");
-    stringBuilder.append("Trà: ").append(tra).append("\n");
-    stringBuilder.append("Ngọt: ").append(ngot).append("\n");
-    stringBuilder.append("Toppings: ").append(topings).append("\n");
-    stringBuilder.append("x ").append(soluong).append("\n");
+    stringBuilder.append(size.get()).append("\n");
+    stringBuilder.append("Đá: ").append(da.get()).append("\n");
+    stringBuilder.append("Trà: ").append(tra.get()).append("\n");
+    stringBuilder.append("Ngọt: ").append(ngot.get()).append("\n");
+    stringBuilder.append("Toppings: ").append(topings.get()).append("\n");
+    stringBuilder.append("x ").append(soluong.get()).append("\n");
     return stringBuilder.toString();
   }
 }

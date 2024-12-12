@@ -16,6 +16,7 @@ public class MainApplication extends Application {
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/login_page.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
+    stage.setTitle("HỆ THỐNG QUẢN LÝ BÁN HÀNG VÀ NHÂN SỰ POS COFFEE");
     stage.setScene(scene);
     stage.show();
   }

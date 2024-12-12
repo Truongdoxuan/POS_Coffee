@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import vn.truongdx.poscoffee_app.models.entities.SanPham;
+import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,11 @@ public class TopingSize_Controller {
   @FXML
   RadioButton rd_khngot, rd_ngotbth, rd_itngot, rd_ngotnhieu;
   @FXML
-  TextField tf_soluong;
+  TextField tf_soluong, txt_tensp, txt_giasp;
   @FXML
   Button btn_close, btn_add, btn_cong, btn_tru;
 
+  ObservableList<SanPham_Bill> billList;
 
   //chọn 1 radio duy nhất trong group đó
   ToggleGroup radioSize;
@@ -45,6 +46,8 @@ public class TopingSize_Controller {
   //hàm thực hiện chức năng
   int soluong = 1; //mặc định 1 món 1 ly
   public void initialize() {
+    billList = FXCollections.observableArrayList();
+
     tf_soluong.setText(String.valueOf(soluong));
     radioSize = new ToggleGroup();
     rd_sizeM.setToggleGroup(radioSize);
@@ -77,6 +80,21 @@ public class TopingSize_Controller {
   }
 
   @FXML
+  public void laytenSP(String tensp) {
+    txt_tensp.setText(tensp);
+    txt_tensp.setEditable(false);
+    txt_tensp.setMouseTransparent(true);
+    txt_tensp.setFocusTraversable(false);
+  }
+
+  @FXML
+  public void laygiaSP(Double giasp) {
+    txt_giasp.setText(String.format("%.0f",giasp));
+    txt_giasp.setEditable(false);
+    txt_giasp.setMouseTransparent(true);
+    txt_giasp.setFocusTraversable(false);
+  }
+  @FXML
   public void tangSl() {
     soluong++;
     tf_soluong.setText(String.valueOf(soluong));
@@ -91,10 +109,17 @@ public class TopingSize_Controller {
   }
 
   public void addintoBill(ActionEvent event) {
-    //lấy checked của radio button size, đá, trà, ngọt v.v
+    String tenSanPham = txt_tensp.getText();
+    int soLuong = 1;
+    soLuong = Integer.parseInt(tf_soluong.getText());
+    double donGia = Double.parseDouble(txt_giasp.getText());
+
     RadioButton selectedSize = (RadioButton) radioSize.getSelectedToggle();
     String size = selectedSize.getText();
 
+    if ("L (+10.000)".equals(size)) {
+      donGia += 10000;
+    }
     RadioButton selectedDa = (RadioButton) radioDa.getSelectedToggle();
     String luongDa = selectedDa.getText();
 
@@ -104,30 +129,30 @@ public class TopingSize_Controller {
     RadioButton selectedNgot = (RadioButton) radioNgot.getSelectedToggle();
     String luongNgot = selectedNgot.getText();
 
-    //lấy checked toppings nếu có
+    // Lấy checked toppings nếu có
     List<String> toppings = new ArrayList<>();
     if (cb_thachdua.isSelected()) toppings.add("Thạch dừa");
     if (cb_thachsocola.isSelected()) toppings.add("Thạch socola");
     if (cb_tranchau.isSelected()) toppings.add("Trân châu");
     if (cb_banhflan.isSelected()) toppings.add("Bánh flan");
 
-    //lấy số lượng
-    int soLuong = Integer.parseInt(tf_soluong.getText());
-
-    //lấy tên sp
-    String namesp = orderController.getNameSp();
-    if (orderController == null) {
-      System.out.println("OrderController is not initialized.");
-      return; // Dừng lại nếu không thể lấy orderController
+    if (soluong > 1) {
+      donGia *= soLuong;
     }
 
-    //tạo đối tượng mới
-    ObservableList<String> observableToppings = FXCollections.observableArrayList(toppings);
-    SanPham selectedsanPham = new SanPham(namesp, size, observableToppings, luongDa, luongTra, luongNgot, soLuong);
+    SanPham_Bill sanPhamBill = new SanPham_Bill(
+        tenSanPham, size, FXCollections.observableArrayList(toppings), luongDa, luongTra, luongNgot, soLuong, donGia);
 
-    orderController.billList.add(selectedsanPham);
+    billList.add(sanPhamBill);
+
+    if (orderController != null) {
+      orderController.addSanPhamintoBill(sanPhamBill);
+    }
+
+    // Đóng cửa sổ modal
     closeModal(event);
   }
+
   public void closeModal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();
     stage.close();

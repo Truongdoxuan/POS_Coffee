@@ -58,29 +58,29 @@
                     <children>
 
                         <Label text="Đơn hàng" />
-                        <Region prefHeight="47.0" prefWidth="186.0" />
+                        <Region prefHeight="47.0" prefWidth="192.0" />
                         <Label fx:id="lb_orderitems" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="PL001" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="Số lượng" />
-                        <Region prefHeight="200.0" prefWidth="200.0" />
-                        <Label fx:id="lb_quantity" text="0" />
+                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Label fx:id="lb_quantity" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="Tạm tính" />
-                        <Region prefHeight="200.0" prefWidth="200.0" />
-                        <Label fx:id="lb_temporary" text="0" />
+                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Label fx:id="lb_temporary" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="173.0">
                     <children>
                         <Label text="Giảm giá" />
-                        <Region prefHeight="200.0" prefWidth="200.0" />
-                        <Label fx:id="lb_coupon" text="0" />
+                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Label fx:id="lb_coupon" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -91,7 +91,7 @@
                             </font>
                         </Label>
                         <Region prefHeight="44.0" prefWidth="140.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lb_totalbill" minWidth="88.0" prefHeight="27.0" prefWidth="104.0" text="0,000" textAlignment="RIGHT">
+                        <Label fx:id="lb_totalbill" minWidth="88.0" prefHeight="27.0" prefWidth="104.0" text="120,000" textAlignment="RIGHT">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -103,8 +103,8 @@
         <TableView id="tb_bill" fx:id="tb_bill" layoutX="17.0" layoutY="68.0" prefHeight="368.0" prefWidth="300.0">
             <columns>
                 <TableColumn fx:id="tc_tensp" prefWidth="156.0000057220459" text="Tên sản phẩm" />
-                <TableColumn fx:id="tc_sl" prefWidth="42.400054931640625" text="SL" style="-fx-alignment: CENTER;" />
-                <TableColumn fx:id="tc_gia" prefWidth="100.79994201660156" text="Đơn giá" style="-fx-alignment: CENTER;" />
+                <TableColumn fx:id="tc_sl" prefWidth="42.400054931640625" style="-fx-alignment: CENTER;" text="SL" />
+                <TableColumn fx:id="tc_gia" prefWidth="100.79994201660156" style="-fx-alignment: CENTER;" text="Đơn giá" />
             </columns>
         </TableView>
       <HBox layoutX="330.0" layoutY="67.0" prefHeight="26.0" prefWidth="550.0">

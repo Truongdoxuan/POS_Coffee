@@ -50,7 +50,9 @@ public class Order_Controller {
   TableColumn<SanPham_Bill, Integer> tc_sl;
   @FXML
   TableColumn<SanPham_Bill, Double> tc_gia;
-  
+  @FXML
+  Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill;
+
   //tạo ds rỗng lưu trữ sp dưới dạng String
   ObservableList<SanPham> sanphamList = FXCollections.observableArrayList();
   //tạo ds lưu trữ các sản phẩm được lọc khi tìm kiếm
@@ -209,6 +211,7 @@ public class Order_Controller {
 
           topingSizeController.laytenSP(selectedSP.getTenSP());
           topingSizeController.laygiaSP(selectedSP.getGiaSP());
+
           Stage modalStage = new Stage();
           modalStage.setScene(new Scene(root));
           modalStage.showAndWait();
@@ -221,5 +224,24 @@ public class Order_Controller {
   public void addSanPhamintoBill(SanPham_Bill sanphamBill) {
     billList.add(sanphamBill);
     tb_bill.setItems(billList);
+    updateTotalBill();
+  }
+  public void updateTotalBill() {
+    int SL = billList.size();
+    int totalSL = billList.stream()
+        .mapToInt(SanPham_Bill::getSoluong)
+        .sum();
+    double totalTemp = billList.stream()
+        .mapToDouble(SanPham_Bill::getDonGia)
+        .sum();
+
+    double discount = 0.0;
+    double totalBill = 0.000;
+    totalBill = totalTemp - discount;
+
+    lb_quantity.setText(String.valueOf(totalSL));
+    lb_temporary.setText(String.format("%,.0f", totalTemp));
+    lb_coupon.setText(String.format("%.0f", discount));
+    lb_totalbill.setText(String.format("%,.0f", totalBill));
   }
 }

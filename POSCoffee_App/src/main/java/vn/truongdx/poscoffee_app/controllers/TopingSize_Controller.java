@@ -114,6 +114,9 @@ public class TopingSize_Controller {
     soLuong = Integer.parseInt(tf_soluong.getText());
     double donGia = Double.parseDouble(txt_giasp.getText());
 
+    if (soluong > 1) {
+      donGia *= soLuong;
+    }
     RadioButton selectedSize = (RadioButton) radioSize.getSelectedToggle();
     String size = selectedSize.getText();
 
@@ -131,17 +134,37 @@ public class TopingSize_Controller {
 
     // Lấy checked toppings nếu có
     List<String> toppings = new ArrayList<>();
-    if (cb_thachdua.isSelected()) toppings.add("Thạch dừa");
-    if (cb_thachsocola.isSelected()) toppings.add("Thạch socola");
-    if (cb_tranchau.isSelected()) toppings.add("Trân châu");
-    if (cb_banhflan.isSelected()) toppings.add("Bánh flan");
+    if (cb_thachdua.isSelected()) toppings.add("Thạch dừa (+20000)");
+    if (cb_thachsocola.isSelected()) toppings.add("Thạch socola (+20000)");
+    if (cb_tranchau.isSelected()) toppings.add("Trân châu (+20000)");
+    if (cb_banhflan.isSelected()) toppings.add("Bánh flan (+20000)");
+    int soluongToppings = toppings.size();
 
-    if (soluong > 1) {
-      donGia *= soLuong;
+    StringBuilder tenSanPhamFull = new StringBuilder(tenSanPham);
+    tenSanPhamFull.append("\nSize: ").append(size);
+    if ("Không".equals(luongDa) || "Ít".equals(luongDa)) {
+      tenSanPhamFull.append("\nĐá: ").append(luongDa);
+    }
+    if ("Không".equals(luongTra) || "Ít".equals(luongTra) || "Nhiều".equals(luongTra)) {
+      tenSanPhamFull.append("\nTrà: ").append(luongTra);
+    }
+    if ("Không".equals(luongNgot) || "Ít".equals(luongNgot) || "Nhiều".equals(luongNgot)) {
+      tenSanPhamFull.append("\nNgọt: ").append(luongNgot);
+    }
+    if (!toppings.isEmpty()) {
+      tenSanPhamFull.append("\nThêm: ").append(String.join("\n",toppings));
+      donGia = donGia + (soluongToppings * 20000);
     }
 
+
     SanPham_Bill sanPhamBill = new SanPham_Bill(
-        tenSanPham, size, FXCollections.observableArrayList(toppings), luongDa, luongTra, luongNgot, soLuong, donGia);
+        tenSanPhamFull.toString(),
+        size,
+        FXCollections.observableArrayList(toppings),
+        luongDa,
+        luongTra,
+        luongNgot,
+        soLuong, donGia);
 
     billList.add(sanPhamBill);
 

@@ -41,10 +41,10 @@
             </rowConstraints>
                 <children>
                     <Button fx:id="btn_topingsize" mnemonicParsing="false" onAction="#change_SizeToping" prefHeight="60.0" prefWidth="130.0" text="Toping, size" />
-                    <Button fx:id="btn_fastAdd" mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Thêm nhanh" GridPane.rowIndex="1" />
-                    <Button fx:id="btn_note" mnemonicParsing="false" onAction="#note_Item" prefHeight="60.0" prefWidth="130.0" text="Ghi chú" GridPane.rowIndex="2" />
+                    <Button fx:id="btn_fastAdd" mnemonicParsing="false" onAction="#fastAddintoBill" prefHeight="60.0" prefWidth="130.0" text="Thêm nhanh" GridPane.rowIndex="1" />
+                    <Button fx:id="btn_voucher" mnemonicParsing="false" onAction="#Voucher" prefHeight="60.0" prefWidth="130.0" text="Voucher" GridPane.rowIndex="2" />
                     <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#delete_Item" prefHeight="60.0" prefWidth="130.0" text="Xóa" GridPane.columnIndex="1" />
-                    <Button fx:id="btn_voucher" mnemonicParsing="false" onAction="#Coupon" prefHeight="60.0" prefWidth="130.0" text="Voucher" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button fx:id="btn_changesl" mnemonicParsing="false" onAction="#changeSL" prefHeight="60.0" prefWidth="130.0" text="Đổi số lượng" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Button fx:id="btn_startshift" mnemonicParsing="false" onAction="#start_workingShifts" prefHeight="60.0" prefWidth="130.0" text="Bắt đầu ca" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancel_Bill" prefHeight="60.0" prefWidth="130.0" text="Hủy giao dịch" GridPane.columnIndex="2" />
                     <Button fx:id="btn_orther" mnemonicParsing="false" onAction="#orther_Functions" prefHeight="60.0" prefWidth="130.0" text="Chức năng khác" GridPane.columnIndex="2" GridPane.rowIndex="1" />

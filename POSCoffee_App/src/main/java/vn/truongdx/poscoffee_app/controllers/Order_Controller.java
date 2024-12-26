@@ -152,9 +152,8 @@ public class Order_Controller {
   public void delete_Item(ActionEvent event) {
 
   }
-  //khuyến mãi
-  public void Coupon(ActionEvent event) {
-
+  public void changeSL(ActionEvent event) {
+    
   }
   //hủy giao dịch
   public void cancel_Bill(ActionEvent event) {
@@ -187,7 +186,7 @@ public class Order_Controller {
 
   }
   //ghi chú vào sản phẩm
-  public void note_Item(ActionEvent event) {
+  public void Voucher(ActionEvent event) {
 
   }
   public void start_workingShifts(ActionEvent event) {
@@ -225,6 +224,22 @@ public class Order_Controller {
     billList.add(sanphamBill);
     tb_bill.setItems(billList);
     updateTotalBill();
+  }
+
+  public void fastAddintoBill(ActionEvent event) {
+    SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
+    String tensp = tb_sanpham.getSelectionModel().getSelectedItem().getTenSP();
+    Double giasp = tb_sanpham.getSelectionModel().getSelectedItem().getGiaSP();
+    if (selectedSP == null) {
+      System.out.println("Vui lòng chọn sản phẩm trước");
+      return;
+    } else {
+      System.out.println("Đã chọn sản phẩm: " + selectedSP + ", Giá: " + selectedSP.getGiaSP());
+      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp);
+      billList.add(sanPhamBill);
+      tb_bill.setItems(billList);
+      updateTotalBill();
+    }
   }
   public void updateTotalBill() {
     int SL = billList.size();

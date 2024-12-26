@@ -14,9 +14,10 @@ public class SanPham_Bill {
   private final SimpleStringProperty ngot;
   private final SimpleIntegerProperty soluong;
   private final SimpleDoubleProperty donGia;
+  private final SimpleDoubleProperty thanhTien;
 
   // Constructor
-  public SanPham_Bill(String tenSanPham, String size, ObservableList<String> topings, String da, String tra, String ngot, int soluong, double donGia) {
+  public SanPham_Bill(String tenSanPham, String size, ObservableList<String> topings, String da, String tra, String ngot, int soluong, double donGia, double thanhTien) {
     this.tenSanPham = new SimpleStringProperty(tenSanPham);
     this.size = new SimpleStringProperty(size);
     this.topings = topings != null ? topings : FXCollections.observableArrayList();
@@ -25,6 +26,7 @@ public class SanPham_Bill {
     this.ngot = new SimpleStringProperty(ngot);
     this.soluong = new SimpleIntegerProperty(soluong);
     this.donGia = new SimpleDoubleProperty(donGia);
+    this.thanhTien = new SimpleDoubleProperty(thanhTien);
   }
 
   // Getter and Setter methods
@@ -90,5 +92,13 @@ public class SanPham_Bill {
 
   public void setDonGia(double donGia) {
     this.donGia.set(donGia);
+  }
+
+  public double getThanhTien() {
+    return thanhTien.get();
+  }
+
+  public void setThanhTien(double thanhTien) {
+    this.thanhTien.set(thanhTien);
   }
 }

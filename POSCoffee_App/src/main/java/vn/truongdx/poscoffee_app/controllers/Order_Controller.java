@@ -51,6 +51,8 @@ public class Order_Controller {
   @FXML
   TableColumn<SanPham_Bill, Double> tc_gia;
   @FXML
+  TableColumn<SanPham_Bill, Double> tc_thanhtien;
+  @FXML
   Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill;
 
   //tạo ds rỗng lưu trữ sp dưới dạng String
@@ -88,6 +90,8 @@ public class Order_Controller {
     tc_sp.setCellValueFactory(new PropertyValueFactory<>("tenSP"));
     tc_dvi.setCellValueFactory(new PropertyValueFactory<>("donviTinh"));
     tc_giasp.setCellValueFactory(new PropertyValueFactory<>("giaSP"));
+    tc_thanhtien.setCellValueFactory(new PropertyValueFactory<>("thanhTien"));
+
     tc_giasp.setCellFactory(col -> new TableCell<SanPham, Double>(){
       @Override
       protected void updateItem(Double item, boolean empty) {
@@ -106,6 +110,7 @@ public class Order_Controller {
     tc_tensp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTenSanPham()));
     tc_sl.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSoluong()).asObject());
     tc_gia.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getDonGia()).asObject());
+    tc_thanhtien.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getThanhTien()).asObject());
     tc_gia.setCellFactory(col -> new TableCell<SanPham_Bill, Double>(){
       @Override
       protected void updateItem(Double item, boolean empty) {
@@ -153,7 +158,32 @@ public class Order_Controller {
 
   }
   public void changeSL(ActionEvent event) {
-    
+    SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
+    if (selectedSP == null) {
+      System.out.println("Vui lòng chọn sản phẩm trước");
+      return;
+    } else {
+      System.out.println("Đã chọn sản phẩm: " + selectedSP);
+      try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/changeSL_page.fxml"));
+        Parent root = fxmlLoader.load();
+        // Truyền đối tượng sản phẩm vào controller
+        ChangeSL_Controller controller = fxmlLoader.getController();
+        controller.setSelectedProduct(selectedSP);
+        Stage changeslStage = new Stage();
+        changeslStage.setScene(new Scene(root));
+        changeslStage.setTitle("Thay đổi số lượng");
+        changeslStage.showAndWait();
+        //cập nhật lại bill
+        tb_bill.refresh();
+        //cập nhật tổng thành tiền
+        updateTotalBill();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+
   }
   //hủy giao dịch
   public void cancel_Bill(ActionEvent event) {
@@ -235,7 +265,7 @@ public class Order_Controller {
       return;
     } else {
       System.out.println("Đã chọn sản phẩm: " + selectedSP + ", Giá: " + selectedSP.getGiaSP());
-      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp);
+      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp,0);
       billList.add(sanPhamBill);
       tb_bill.setItems(billList);
       updateTotalBill();
@@ -247,7 +277,7 @@ public class Order_Controller {
         .mapToInt(SanPham_Bill::getSoluong)
         .sum();
     double totalTemp = billList.stream()
-        .mapToDouble(SanPham_Bill::getDonGia)
+        .mapToDouble(SanPham_Bill::getThanhTien)
         .sum();
 
     double discount = 0.0;

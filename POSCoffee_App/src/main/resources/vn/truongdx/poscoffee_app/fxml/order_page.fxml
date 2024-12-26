@@ -14,21 +14,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="698.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Order_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="698.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Order_Controller">
     <children>
         <Label layoutX="14.0" layoutY="5.0" text="Ngày KD" />
         <TextField fx:id="txt_dayKD" layoutX="12.0" layoutY="21.0" prefHeight="26.0" prefWidth="102.0" />
         <Label layoutX="143.0" layoutY="4.0" text="Ca" />
         <TextField fx:id="txt_workshifts" layoutX="143.0" layoutY="20.0" prefHeight="26.0" prefWidth="55.0" />
-        <TextField fx:id="txt_staffname" layoutX="245.0" layoutY="21.0" />
-        <Label layoutX="245.0" layoutY="4.0" text="Nhân viên" />
-        <Label layoutX="569.0" layoutY="6.0" text="Thời gian" />
-        <TextField fx:id="txt_time" layoutX="569.0" layoutY="22.0" />
-        <TextField fx:id="txt_version" layoutX="787.0" layoutY="22.0" prefHeight="26.0" prefWidth="91.0" />
-        <Label layoutX="833.0" layoutY="5.0" text="Version" />
-        <Label layoutX="428.0" layoutY="5.0" text="Mã POS" />
-        <TextField fx:id="txt_poscode" layoutX="428.0" layoutY="21.0" prefHeight="26.0" prefWidth="101.0" />
-        <GridPane layoutX="331.0" layoutY="443.0" prefHeight="217.0" prefWidth="419.0">
+        <TextField fx:id="txt_staffname" layoutX="217.0" layoutY="20.0" prefHeight="26.0" prefWidth="218.0" />
+        <Label layoutX="221.0" layoutY="3.0" text="Nhân viên" />
+        <Label layoutX="750.0" layoutY="5.0" text="Thời gian" />
+        <TextField fx:id="txt_time" layoutX="750.0" layoutY="21.0" />
+        <TextField fx:id="txt_version" layoutX="936.0" layoutY="21.0" prefHeight="26.0" prefWidth="91.0" />
+        <Label layoutX="982.0" layoutY="4.0" text="Version" />
+        <Label layoutX="570.0" layoutY="4.0" text="Mã POS" />
+        <TextField fx:id="txt_poscode" layoutX="570.0" layoutY="20.0" prefHeight="26.0" prefWidth="101.0" />
+        <GridPane layoutX="473.0" layoutY="443.0" prefHeight="217.0" prefWidth="419.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.3999755859375" minWidth="10.0" prefWidth="148.19998779296876" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.3999938964844" minWidth="0.0" prefWidth="148.80001831054688" />
@@ -51,35 +51,35 @@
                     <Button fx:id="btn_report" mnemonicParsing="false" onAction="#fast_Report" prefHeight="60.0" prefWidth="130.0" text="Báo cáo nhanh" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                 </children>
         </GridPane>
-        <Button fx:id="btn_pay" layoutX="766.0" layoutY="444.0" mnemonicParsing="false" onAction="#pay_Bill" prefHeight="218.0" prefWidth="114.0" text="Thanh toán" />
-        <VBox fx:id="vb_tinhbill" layoutX="16.0" layoutY="446.0" prefHeight="235.0" prefWidth="300.0">
+        <Button fx:id="btn_pay" layoutX="912.0" layoutY="441.0" mnemonicParsing="false" onAction="#pay_Bill" prefHeight="218.0" prefWidth="114.0" text="Thanh toán" />
+        <VBox fx:id="vb_tinhbill" layoutX="16.0" layoutY="446.0" prefHeight="235.0" prefWidth="416.0">
             <children>
                 <HBox prefHeight="100.0" prefWidth="274.0">
                     <children>
 
                         <Label text="Đơn hàng" />
-                        <Region prefHeight="47.0" prefWidth="192.0" />
+                        <Region prefHeight="47.0" prefWidth="282.0" />
                         <Label fx:id="lb_orderitems" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="PL001" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="Số lượng" />
-                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Region prefHeight="47.0" prefWidth="298.0" />
                         <Label fx:id="lb_quantity" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="Tạm tính" />
-                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Region prefHeight="47.0" prefWidth="297.0" />
                         <Label fx:id="lb_temporary" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="173.0">
                     <children>
                         <Label text="Giảm giá" />
-                        <Region prefHeight="47.0" prefWidth="202.0" />
+                        <Region prefHeight="47.0" prefWidth="295.0" />
                         <Label fx:id="lb_coupon" text="0" textAlignment="RIGHT" />
                     </children>
                 </HBox>
@@ -100,14 +100,15 @@
                 </HBox>
             </children>
         </VBox>
-        <TableView id="tb_bill" fx:id="tb_bill" layoutX="17.0" layoutY="68.0" prefHeight="368.0" prefWidth="300.0">
+        <TableView id="tb_bill" fx:id="tb_bill" layoutX="17.0" layoutY="68.0" prefHeight="368.0" prefWidth="416.0">
             <columns>
                 <TableColumn fx:id="tc_tensp" prefWidth="156.0000057220459" text="Tên sản phẩm" />
                 <TableColumn fx:id="tc_sl" prefWidth="42.400054931640625" style="-fx-alignment: CENTER;" text="SL" />
                 <TableColumn fx:id="tc_gia" prefWidth="100.79994201660156" style="-fx-alignment: CENTER;" text="Đơn giá" />
+            <TableColumn fx:id="tc_thanhtien" prefWidth="114.39999389648438" text="Thành tiền" />
             </columns>
         </TableView>
-      <HBox layoutX="330.0" layoutY="67.0" prefHeight="26.0" prefWidth="550.0">
+      <HBox layoutX="471.0" layoutY="62.0" prefHeight="26.0" prefWidth="556.0">
          <children>
               <Label prefHeight="26.0" prefWidth="53.0" text="Tìm kiếm">
                <font>
@@ -115,10 +116,10 @@
                </font>
             </Label>
             <Region prefHeight="26.0" prefWidth="16.0" HBox.hgrow="ALWAYS" />
-              <TextField fx:id="txt_searchItem" onAction="#search_Item" prefHeight="26.0" prefWidth="448.0" />
+              <TextField fx:id="txt_searchItem" onAction="#search_Item" prefHeight="26.0" prefWidth="458.0" />
          </children>
       </HBox>
-      <TableView fx:id="tb_sanpham" layoutX="328.0" layoutY="95.0" prefHeight="341.0" prefWidth="550.0">
+      <TableView fx:id="tb_sanpham" layoutX="472.0" layoutY="93.0" prefHeight="342.0" prefWidth="554.0">
         <columns>
           <TableColumn fx:id="tc_sp" prefWidth="350.4000244140625" style="-fx-padding: 0 20px;" text="Danh mục sản phẩm" />
             <TableColumn fx:id="tc_dvi" prefWidth="76.0" style="-fx-alignment: CENTER;" text="Đơn vị tính" />

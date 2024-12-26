@@ -112,16 +112,17 @@ public class TopingSize_Controller {
     String tenSanPham = txt_tensp.getText();
     int soLuong = 1;
     soLuong = Integer.parseInt(tf_soluong.getText());
+    double thanhtien = Double.parseDouble(txt_giasp.getText());
     double donGia = Double.parseDouble(txt_giasp.getText());
 
     if (soluong > 1) {
-      donGia *= soLuong;
+      thanhtien *= soLuong;
     }
     RadioButton selectedSize = (RadioButton) radioSize.getSelectedToggle();
     String size = selectedSize.getText();
 
     if ("L (+10.000)".equals(size)) {
-      donGia += 10000;
+      thanhtien += 10000;
     }
     RadioButton selectedDa = (RadioButton) radioDa.getSelectedToggle();
     String luongDa = selectedDa.getText();
@@ -153,7 +154,7 @@ public class TopingSize_Controller {
     }
     if (!toppings.isEmpty()) {
       tenSanPhamFull.append("\nThêm: ").append(String.join("\n",toppings));
-      donGia = donGia + (soluongToppings * 20000);
+      thanhtien = thanhtien + (soluongToppings * 20000);
     }
 
 
@@ -164,7 +165,7 @@ public class TopingSize_Controller {
         luongDa,
         luongTra,
         luongNgot,
-        soLuong, donGia);
+        soLuong, donGia, thanhtien);
 
     billList.add(sanPhamBill);
 

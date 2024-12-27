@@ -105,7 +105,7 @@
                 <TableColumn fx:id="tc_tensp" prefWidth="156.0000057220459" text="Tên sản phẩm" />
                 <TableColumn fx:id="tc_sl" prefWidth="42.400054931640625" style="-fx-alignment: CENTER;" text="SL" />
                 <TableColumn fx:id="tc_gia" prefWidth="100.79994201660156" style="-fx-alignment: CENTER;" text="Đơn giá" />
-            <TableColumn fx:id="tc_thanhtien" prefWidth="114.39999389648438" text="Thành tiền" />
+            <TableColumn fx:id="tc_thanhtien" prefWidth="114.39999389648438" style="-fx-alignment: CENTER;" text="Thành tiền" />
             </columns>
         </TableView>
       <HBox layoutX="471.0" layoutY="62.0" prefHeight="26.0" prefWidth="556.0">

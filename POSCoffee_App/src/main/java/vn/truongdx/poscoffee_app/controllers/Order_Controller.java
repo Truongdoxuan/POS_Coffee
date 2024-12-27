@@ -124,6 +124,19 @@ public class Order_Controller {
         }
       }
     });
+    tc_thanhtien.setCellFactory(col -> new TableCell<SanPham_Bill, Double>(){
+      @Override
+      protected void updateItem(Double item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty || item == null) {
+          setText(null);
+        } else {
+          // Sử dụng DecimalFormat để thêm dấu phân cách mỗi 3 chữ số
+          DecimalFormat format = new DecimalFormat("#,###");
+          setText(format.format(item));
+        }
+      }
+    });
     tb_bill.setItems(billList);
 
     //đặt dữ liệu từ csdl vào listview
@@ -265,7 +278,7 @@ public class Order_Controller {
       return;
     } else {
       System.out.println("Đã chọn sản phẩm: " + selectedSP + ", Giá: " + selectedSP.getGiaSP());
-      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp,0);
+      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp,giasp);
       billList.add(sanPhamBill);
       tb_bill.setItems(billList);
       updateTotalBill();

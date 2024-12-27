@@ -269,6 +269,41 @@ public class Order_Controller {
     updateTotalBill();
   }
 
+  @FXML
+  public void editSanPhaminBill() {
+    SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
+    if (selectedSP == null) {
+      System.out.println("Vui lòng chọn sản phẩm");
+      return;
+    } else {
+      System.out.println("Đã chọn sản phẩm: " + selectedSP.getTenSanPham() + ", Giá: " + selectedSP.getDonGia());
+      try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
+        Parent root = fxmlLoader.load();
+
+        TopingSize_Controller topingSizeController = fxmlLoader.getController();
+        topingSizeController.setOrderController(this);
+
+        //gửi thông tin các mục sang controller để hiển thị
+        topingSizeController.loadSanPhamtoEdit(selectedSP);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void loadSanPhamtoEdit(SanPham_Bill updatedSP) {
+    int selectedSP = tb_bill.getSelectionModel().getSelectedIndex();
+    if (selectedSP >=0) {
+      billList.set(selectedSP, updatedSP);
+      tb_bill.refresh();
+      updateTotalBill();
+    }
+  }
   public void fastAddintoBill(ActionEvent event) {
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
     String tensp = tb_sanpham.getSelectionModel().getSelectedItem().getTenSP();

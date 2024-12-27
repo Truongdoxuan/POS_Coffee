@@ -14,6 +14,8 @@ import java.util.List;
 public class TopingSize_Controller {
   //truyền đối tượng Order_controller
   private Order_Controller orderController;
+  //biến lưu sản phẩm đang chỉnh sửa
+  private SanPham_Bill editingSP;
 
   public void setOrderController(Order_Controller orderController) {
     this.orderController = orderController;
@@ -176,9 +178,11 @@ public class TopingSize_Controller {
     // Đóng cửa sổ modal
     closeModal(event);
   }
-
+  
   public void closeModal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();
     stage.close();
   }
 }
+
+

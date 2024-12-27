@@ -14,8 +14,6 @@ import java.util.List;
 public class TopingSize_Controller {
   //truyền đối tượng Order_controller
   private Order_Controller orderController;
-  //biến lưu sản phẩm đang chỉnh sửa
-  private SanPham_Bill editingSP;
 
   public void setOrderController(Order_Controller orderController) {
     this.orderController = orderController;
@@ -47,6 +45,7 @@ public class TopingSize_Controller {
 
   //hàm thực hiện chức năng
   int soluong = 1; //mặc định 1 món 1 ly
+
   public void initialize() {
     billList = FXCollections.observableArrayList();
 
@@ -112,10 +111,9 @@ public class TopingSize_Controller {
 
   public void addintoBill(ActionEvent event) {
     String tenSanPham = txt_tensp.getText();
-    int soLuong = 1;
-    soLuong = Integer.parseInt(tf_soluong.getText());
-    double thanhtien = Double.parseDouble(txt_giasp.getText());
+    int soLuong = Integer.parseInt(tf_soluong.getText());
     double donGia = Double.parseDouble(txt_giasp.getText());
+    double thanhtien = Double.parseDouble(txt_giasp.getText());
 
     if (soluong > 1) {
       thanhtien *= soLuong;
@@ -158,8 +156,6 @@ public class TopingSize_Controller {
       tenSanPhamFull.append("\nThêm: ").append(String.join("\n",toppings));
       thanhtien = thanhtien + (soluongToppings * 20000);
     }
-
-
     SanPham_Bill sanPhamBill = new SanPham_Bill(
         tenSanPhamFull.toString(),
         size,
@@ -178,7 +174,6 @@ public class TopingSize_Controller {
     // Đóng cửa sổ modal
     closeModal(event);
   }
-  
   public void closeModal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();
     stage.close();

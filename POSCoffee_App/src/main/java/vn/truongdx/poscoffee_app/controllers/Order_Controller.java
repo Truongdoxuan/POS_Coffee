@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
@@ -168,7 +169,15 @@ public class Order_Controller {
 
   //xóa sản phẩm khi đã thêm vào bill
   public void delete_Item(ActionEvent event) {
-
+    SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
+    if (selectedSP == null) {
+      System.out.println("Vui lòng chọn sản phẩm trước");
+      return;
+    } else {
+      System.out.println("Đã chọn sản phẩm: "+selectedSP.getTenSanPham());
+      tb_bill.getItems().remove(selectedSP);
+      updateTotalBill();
+    }
   }
   public void changeSL(ActionEvent event) {
     SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
@@ -176,7 +185,7 @@ public class Order_Controller {
       System.out.println("Vui lòng chọn sản phẩm trước");
       return;
     } else {
-      System.out.println("Đã chọn sản phẩm: " + selectedSP);
+      System.out.println("Đã chọn sản phẩm: " + selectedSP.getTenSanPham());
       try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/changeSL_page.fxml"));
         Parent root = fxmlLoader.load();
@@ -269,41 +278,6 @@ public class Order_Controller {
     updateTotalBill();
   }
 
-  @FXML
-  public void editSanPhaminBill() {
-    SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
-    if (selectedSP == null) {
-      System.out.println("Vui lòng chọn sản phẩm");
-      return;
-    } else {
-      System.out.println("Đã chọn sản phẩm: " + selectedSP.getTenSanPham() + ", Giá: " + selectedSP.getDonGia());
-      try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
-        Parent root = fxmlLoader.load();
-
-        TopingSize_Controller topingSizeController = fxmlLoader.getController();
-        topingSizeController.setOrderController(this);
-
-        //gửi thông tin các mục sang controller để hiển thị
-        topingSizeController.loadSanPhamtoEdit(selectedSP);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  public void loadSanPhamtoEdit(SanPham_Bill updatedSP) {
-    int selectedSP = tb_bill.getSelectionModel().getSelectedIndex();
-    if (selectedSP >=0) {
-      billList.set(selectedSP, updatedSP);
-      tb_bill.refresh();
-      updateTotalBill();
-    }
-  }
   public void fastAddintoBill(ActionEvent event) {
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
     String tensp = tb_sanpham.getSelectionModel().getSelectedItem().getTenSP();

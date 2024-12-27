@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
 
 public class ChangeSL_Controller {
@@ -62,7 +63,7 @@ public class ChangeSL_Controller {
       selectedProduct.setThanhTien(thanhtienMoi);
       System.out.println("Số lượng đã thay đổi thành: " + soLuongMoi);
       System.out.println("Đơn giá đã thay đổi thành: " + thanhtienMoi);
-      closeModal(event); 
+      closeModal(event);
     } catch (NumberFormatException e) {
       System.out.println("Số lượng không hợp lệ!");
     }

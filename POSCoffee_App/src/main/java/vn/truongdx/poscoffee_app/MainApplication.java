@@ -4,20 +4,17 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import vn.truongdx.poscoffee_app.repositories.EmployeeRepository;
-import vn.truongdx.poscoffee_app.repositories.EmployeeRepositoryImpl;
-import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
+import vn.truongdx.poscoffee_app.utility.Stage_Standard;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 public class MainApplication extends Application {
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/login_page.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
-    stage.initStyle(StageStyle.UNDECORATED);
+    Stage_Standard.removeTitleBar(stage);
+    Stage_Standard.CenterStage(stage,600,400);
     stage.setScene(scene);
     stage.show();
   }

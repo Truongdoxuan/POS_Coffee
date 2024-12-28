@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.utility.Stage_Standard;
 
 public class OrtherFunction_Controller {
   //khai báo biến
@@ -37,10 +38,12 @@ public class OrtherFunction_Controller {
       if (respone == ButtonType.OK) {
         try {
           //trở về trang login
+          Stage Orther_Stage = (Stage) btn_logout.getScene().getWindow();
           FXMLLoader fxmlLoader = new FXMLLoader(OrtherFunction_Controller.class.getResource("/vn/truongdx/poscoffee_app/fxml/login_page.fxml"));
           Parent root = fxmlLoader.load();
           Stage loginStage = new Stage();
           loginStage.setScene(new Scene(root));
+          Stage_Standard.removeTitleBar(loginStage);
           loginStage.show();
 
           //đóng các trang đang mở

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
+import vn.truongdx.poscoffee_app.utility.Stage_Standard;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
 
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class Order_Controller {
   @FXML
   TextField txt_searchItem;
   @FXML
-  Button btn_orther, btn_topingsize;
+  Button btn_orther, btn_topingsize, btn_changesl;
   @FXML
   TableView<SanPham> tb_sanpham;
   @FXML
@@ -197,6 +199,7 @@ public class Order_Controller {
   }
   public void changeSL(ActionEvent event) {
     SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
+    Stage Order_Stage = (Stage) btn_changesl.getScene().getWindow();
     if (selectedSP == null) {
       Alert warning = new Alert(Alert.AlertType.WARNING);
       warning.setTitle("Cảnh báo");
@@ -210,10 +213,11 @@ public class Order_Controller {
         // Truyền đối tượng sản phẩm vào controller
         ChangeSL_Controller controller = fxmlLoader.getController();
         controller.setSelectedProduct(selectedSP);
-        Stage changeslStage = new Stage();
-        changeslStage.setScene(new Scene(root));
-        changeslStage.setTitle("Thay đổi số lượng");
-        changeslStage.showAndWait();
+        Stage changeSL_Stage = new Stage();
+        changeSL_Stage.setScene(new Scene(root));
+        Stage_Standard.removeTitleBar(changeSL_Stage);
+        Stage_Standard.CenterModal(Order_Stage,changeSL_Stage);
+        changeSL_Stage.showAndWait();
         //cập nhật lại bill
         tb_bill.refresh();
         //cập nhật tổng thành tiền
@@ -255,13 +259,18 @@ public class Order_Controller {
   }
   //button mở modal các chức năng khác
   public void orther_Functions() {
+    Stage Order_Stage = (Stage) btn_orther.getScene().getWindow();
     //mở modal chức năng khác
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/ortherFunctions_page.fxml"));
       Parent root = fxmlLoader.load();
-      Stage ortherSatge = new Stage();
-      ortherSatge.setScene(new Scene(root));
-      ortherSatge.showAndWait(); //thao tác only modal này đến khi được đóng lại
+      Stage ortherStage = new Stage();
+      ortherStage.setScene(new Scene(root));
+      Stage_Standard.removeTitleBar(ortherStage);
+
+      // Căn giữa cửa sổ modal trong cửa sổ chính
+      Stage_Standard.CenterModal(Order_Stage, ortherStage);
+      ortherStage.showAndWait();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -286,32 +295,39 @@ public class Order_Controller {
   //thay đổi kích cỡ sản phẩm, thêm toping
   public void change_SizeToping(ActionEvent event) {
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
+    Stage Order_Stage = (Stage) btn_topingsize.getScene().getWindow();
+
     // Chọn 1 sản phẩm từ TableView
-      if (selectedSP == null) {
-        Alert warning = new Alert(Alert.AlertType.WARNING);
-        warning.setTitle("Cảnh báo");
-        warning.setHeaderText("Vui lòng chọn sản phẩm trước");
-        warning.showAndWait();
-      } else {
-        try {
-          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
-          Parent root = fxmlLoader.load();
+    if (selectedSP == null) {
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+      warning.showAndWait();
+    } else {
+      try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
+        Parent root = fxmlLoader.load();
 
-          TopingSize_Controller topingSizeController = fxmlLoader.getController();
-          topingSizeController.setOrderController(this);
+        TopingSize_Controller topingSizeController = fxmlLoader.getController();
+        topingSizeController.setOrderController(this);
 
-          topingSizeController.laytenSP(selectedSP.getTenSP());
-          topingSizeController.laygiaSP(selectedSP.getGiaSP());
+        topingSizeController.laytenSP(selectedSP.getTenSP());
+        topingSizeController.laygiaSP(selectedSP.getGiaSP());
 
-          Stage modalStage = new Stage();
-          modalStage.setScene(new Scene(root));
-          modalStage.showAndWait();
+        Stage changeSize_Stage = new Stage();
+        changeSize_Stage.setScene(new Scene(root));
+        Stage_Standard.removeTitleBar(changeSize_Stage);
 
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+        // Căn giữa cửa sổ modal trong cửa sổ chính
+        Stage_Standard.CenterModal(Order_Stage, changeSize_Stage);
+
+        changeSize_Stage.showAndWait();
+      } catch (IOException e) {
+        e.printStackTrace();
       }
+    }
   }
+
   public void addSanPhamintoBill(SanPham_Bill sanphamBill) {
     billList.add(sanphamBill);
     tb_bill.setItems(billList);

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import vn.truongdx.poscoffee_app.repositories.EmployeeRepository;
 import vn.truongdx.poscoffee_app.repositories.EmployeeRepositoryImpl;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
@@ -16,7 +17,7 @@ public class MainApplication extends Application {
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/login_page.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
-    stage.setTitle("HỆ THỐNG QUẢN LÝ BÁN HÀNG VÀ NHÂN SỰ POS COFFEE");
+    stage.initStyle(StageStyle.UNDECORATED);
     stage.setScene(scene);
     stage.show();
   }

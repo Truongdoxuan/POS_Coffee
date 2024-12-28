@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class OrtherFunction_Controller {
@@ -20,24 +22,38 @@ public class OrtherFunction_Controller {
 
   }
   public void Logout(ActionEvent event) {
-    try {
-      //trở về trang login
-      FXMLLoader fxmlLoader = new FXMLLoader(OrtherFunction_Controller.class.getResource("/vn/truongdx/poscoffee_app/fxml/login_page.fxml"));
-      Parent root = fxmlLoader.load();
-      Stage loginStage = new Stage();
-      loginStage.setScene(new Scene(root));
-      loginStage.show();
-
-      //đóng các trang đang mở
-      Stage.getWindows().stream()
-          .filter(window -> window instanceof Stage && window != loginStage)
-          .forEach(window -> ((Stage)window).close());
-      Stage stage = (Stage) btn_close.getScene().getWindow();
-      stage.close();
-    } catch (Exception e) {
-      e.printStackTrace();
+    Alert confirmLogout = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmLogout.setTitle("Xác nhận");
+    confirmLogout.setHeaderText("Đăng xuất POS ?");
+    Button btn_ok = (Button) confirmLogout.getDialogPane().lookupButton(ButtonType.OK);
+    Button btn_cancel = (Button) confirmLogout.getDialogPane().lookupButton(ButtonType.CANCEL);
+    if (btn_ok != null) {
+      btn_ok.setText("Đồng ý");
     }
+    if (btn_cancel != null) {
+      btn_cancel.setText("Không");
+    }
+    confirmLogout.showAndWait().ifPresent(respone -> {
+      if (respone == ButtonType.OK) {
+        try {
+          //trở về trang login
+          FXMLLoader fxmlLoader = new FXMLLoader(OrtherFunction_Controller.class.getResource("/vn/truongdx/poscoffee_app/fxml/login_page.fxml"));
+          Parent root = fxmlLoader.load();
+          Stage loginStage = new Stage();
+          loginStage.setScene(new Scene(root));
+          loginStage.show();
 
+          //đóng các trang đang mở
+          Stage.getWindows().stream()
+              .filter(window -> window instanceof Stage && window != loginStage)
+              .forEach(window -> ((Stage)window).close());
+          Stage stage = (Stage) btn_close.getScene().getWindow();
+          stage.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
   public void close_Modal(ActionEvent event) {
     Stage stage = (Stage) btn_close.getScene().getWindow();

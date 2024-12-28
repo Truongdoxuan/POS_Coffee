@@ -171,21 +171,39 @@ public class Order_Controller {
   public void delete_Item(ActionEvent event) {
     SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
     if (selectedSP == null) {
-      System.out.println("Vui lòng chọn sản phẩm trước");
-      return;
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+      warning.showAndWait();
     } else {
-      System.out.println("Đã chọn sản phẩm: "+selectedSP.getTenSanPham());
-      tb_bill.getItems().remove(selectedSP);
-      updateTotalBill();
+      Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+      confirmDelete.setTitle("Thực hiện xóa");
+      confirmDelete.setHeaderText("Xác nhận xóa: "+selectedSP.getTenSanPham());
+      Button btn_ok = (Button) confirmDelete.getDialogPane().lookupButton(ButtonType.OK);
+      Button btn_cancel = (Button) confirmDelete.getDialogPane().lookupButton(ButtonType.CANCEL);
+      if (btn_ok != null) {
+        btn_ok.setText("Xóa");
+      }
+      if (btn_cancel != null) {
+        btn_cancel.setText("Hủy");
+      }
+      confirmDelete.showAndWait().ifPresent(respone -> {
+        if (respone == ButtonType.OK) {
+          tb_bill.getItems().remove(selectedSP);
+          updateTotalBill();
+        }
+      });
     }
   }
   public void changeSL(ActionEvent event) {
     SanPham_Bill selectedSP = tb_bill.getSelectionModel().getSelectedItem();
     if (selectedSP == null) {
-      System.out.println("Vui lòng chọn sản phẩm trước");
-      return;
-    } else {
-      System.out.println("Đã chọn sản phẩm: " + selectedSP.getTenSanPham());
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+      warning.showAndWait();
+    }
+    else {
       try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/changeSL_page.fxml"));
         Parent root = fxmlLoader.load();
@@ -204,11 +222,35 @@ public class Order_Controller {
         e.printStackTrace();
       }
     }
-
-
   }
   //hủy giao dịch
   public void cancel_Bill(ActionEvent event) {
+    if (billList.isEmpty()) {
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Không có giao dịch nào đang thực hiện ");
+      warning.showAndWait();
+    }
+    else {
+     Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+     confirmDelete.setTitle("Xác nhận");
+     confirmDelete.setHeaderText("Hủy giao dịch hiện tại ?");
+     Button btn_ok = (Button) confirmDelete.getDialogPane().lookupButton(ButtonType.OK);
+     Button btn_cancel = (Button) confirmDelete.getDialogPane().lookupButton(ButtonType.CANCEL);
+     if (btn_ok != null) {
+       btn_ok.setText("Hủy");
+     }
+     if (btn_cancel != null) {
+       btn_cancel.setText("Không");
+     }
+     confirmDelete.showAndWait().ifPresent(respone -> {
+       if (respone == ButtonType.OK) {
+          billList.clear();
+          updateTotalBill();
+       }
+     });
+    }
+
 
   }
   //button mở modal các chức năng khác
@@ -233,10 +275,7 @@ public class Order_Controller {
   public void pay_Bill(ActionEvent event) {
 
   }
-  //tìm kiếm sản phẩm
-  public void search_Item(ActionEvent event) {
 
-  }
   //ghi chú vào sản phẩm
   public void Voucher(ActionEvent event) {
 
@@ -249,10 +288,11 @@ public class Order_Controller {
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
     // Chọn 1 sản phẩm từ TableView
       if (selectedSP == null) {
-        System.out.println("Vui lòng chọn sản phẩm trước");
-        return;
+        Alert warning = new Alert(Alert.AlertType.WARNING);
+        warning.setTitle("Cảnh báo");
+        warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+        warning.showAndWait();
       } else {
-        System.out.println("Đã chọn sản phẩm: " + selectedSP.getTenSP() + ", Giá: " + selectedSP.getGiaSP());
         try {
           FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/topingsize_page.fxml"));
           Parent root = fxmlLoader.load();
@@ -283,11 +323,12 @@ public class Order_Controller {
     String tensp = tb_sanpham.getSelectionModel().getSelectedItem().getTenSP();
     Double giasp = tb_sanpham.getSelectionModel().getSelectedItem().getGiaSP();
     if (selectedSP == null) {
-      System.out.println("Vui lòng chọn sản phẩm trước");
-      return;
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+      warning.showAndWait();
     } else {
-      System.out.println("Đã chọn sản phẩm: " + selectedSP + ", Giá: " + selectedSP.getGiaSP());
-      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,"M",null,null,null,null,1,giasp,giasp);
+      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,null,null,null,null,null,1,giasp,giasp);
       billList.add(sanPhamBill);
       tb_bill.setItems(billList);
       updateTotalBill();

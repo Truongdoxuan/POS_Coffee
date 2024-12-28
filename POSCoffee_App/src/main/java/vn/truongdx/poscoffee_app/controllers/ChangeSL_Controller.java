@@ -2,6 +2,7 @@ package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -61,11 +62,13 @@ public class ChangeSL_Controller {
       double thanhtienMoi = soLuongMoi * selectedProduct.getDonGia();
       selectedProduct.setSoluong(soLuongMoi); // Cập nhật số lượng mới vào đối tượng
       selectedProduct.setThanhTien(thanhtienMoi);
-      System.out.println("Số lượng đã thay đổi thành: " + soLuongMoi);
-      System.out.println("Đơn giá đã thay đổi thành: " + thanhtienMoi);
       closeModal(event);
     } catch (NumberFormatException e) {
-      System.out.println("Số lượng không hợp lệ!");
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Số lượng không hợp lệ");
+      warning.showAndWait();
+      txt_sl.setText(String.valueOf(soluong));
     }
   }
 

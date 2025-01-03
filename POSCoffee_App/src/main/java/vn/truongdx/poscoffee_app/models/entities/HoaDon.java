@@ -2,9 +2,7 @@ package vn.truongdx.poscoffee_app.models.entities;
 
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -16,16 +14,17 @@ public class HoaDon {
 
     try {
       Connection conn = DatabaseConnection.getConnection("posdatabase", "root", "");
-      PreparedStatement insertData = conn.prepareStatement(insertHoadon);
-      PreparedStatement getId = conn.prepareStatement(getMahoadon);
+      PreparedStatement insertData = conn.prepareStatement(insertHoadon, Statement.RETURN_GENERATED_KEYS);
 
-      insertData.setString(1,ca);
-      insertData.setString(2,ca);
+      insertData.setDate(1, Date.valueOf(ngayThanhtoan));
+      insertData.setTime(2,Time.valueOf(gioThanhtoan));
+      insertData.setString(3,ca);
+      insertData.setDouble(4, tongTien);
       insertData.executeUpdate();
 
-      ResultSet rs = getId.executeQuery();
+      ResultSet rs = insertData.getGeneratedKeys(); //lấy id
       if (rs.next()) {
-        mahoadon = rs.getInt("maHoadon");
+        mahoadon = rs.getInt(1);
       }
     } catch (Exception e) {
       e.printStackTrace();

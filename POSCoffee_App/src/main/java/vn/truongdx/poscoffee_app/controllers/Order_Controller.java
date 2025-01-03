@@ -331,6 +331,7 @@ public class Order_Controller {
   public void start_workingShifts(ActionEvent event) {
     // Lấy giờ hiện tại
     LocalTime currentTime = LocalTime.now();
+    LocalDate currentDate = LocalDate.now();
 
     // Set thời gian của 1 ca làm
     LocalTime start = LocalTime.of(6, 30);
@@ -352,7 +353,10 @@ public class Order_Controller {
 
     //tạo hóa đơn mới lưu trữ nó theo ca sáng tối
     HoaDon hoaDon = new HoaDon();
-    int maHoadon = hoaDon.createHoaDon(shift, currentTime);
+    String totalbillText = lb_totalbill.getText().trim();
+    totalbillText = totalbillText.replace(",",""); //xóa dấu ,
+    double tongTien = Double.parseDouble(totalbillText);
+    int maHoadon = hoaDon.createHoaDon(currentDate, currentTime,shift,tongTien);
 
     if (maHoadon != -1) {
       lb_billID.setText("POS"+maHoadon);

@@ -1,5 +1,7 @@
 package vn.truongdx.poscoffee_app.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
 import vn.truongdx.poscoffee_app.utility.Stage_Standard;
@@ -28,6 +31,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Order_Controller {
   //khai báo biến
@@ -36,7 +42,7 @@ public class Order_Controller {
   @FXML
   TextField txt_searchItem;
   @FXML
-  Button btn_orther, btn_topingsize, btn_changesl;
+  Button btn_orther, btn_topingsize, btn_changesl, btn_pay;
   @FXML
   TableView<SanPham> tb_sanpham;
   @FXML
@@ -56,7 +62,7 @@ public class Order_Controller {
   @FXML
   TableColumn<SanPham_Bill, Double> tc_thanhtien;
   @FXML
-  Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill;
+  Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill, lb_orderitems;
 
   //tạo ds rỗng lưu trữ sp dưới dạng String
   ObservableList<SanPham> sanphamList = FXCollections.observableArrayList();
@@ -145,6 +151,27 @@ public class Order_Controller {
     //đặt dữ liệu từ csdl vào listview
     sanphamList = getSanPhamFromDataBase();
     tb_sanpham.setItems(sanphamList);
+
+    //lấy ngày giờ hiện tại
+    LocalDate currentDate = LocalDate.now();
+    //định dạng
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    //gán vào textfield
+    txt_dayKD.setText(currentDate.format(dateTimeFormatter));
+    txt_dayKD.setEditable(false);
+    txt_dayKD.setMouseTransparent(true);
+    txt_dayKD.setFocusTraversable(false);
+    //thời gian
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+      LocalTime currentTime = LocalTime.now();
+      txt_time.setText(currentTime.format(timeFormatter));
+    }));
+    clock.setCycleCount(Timeline.INDEFINITE); //lặp vô hạn
+    clock.play();
+    txt_time.setEditable(false);
+    txt_time.setFocusTraversable(false);
+    txt_time.setMouseTransparent(true);
 
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");
@@ -282,7 +309,18 @@ public class Order_Controller {
   }
   //thanh toán hóa đơn
   public void pay_Bill(ActionEvent event) {
-
+    if (billList.isEmpty()) {
+      Alert warning = new Alert(Alert.AlertType.WARNING);
+      warning.setTitle("Cảnh báo");
+      warning.setHeaderText("Vui lòng chọn sản phẩm trước");
+      warning.showAndWait();
+    }
+    else {
+      Alert corfimPay = new Alert(Alert.AlertType.CONFIRMATION);
+      corfimPay.setTitle("Xác nhận");
+      corfimPay.setHeaderText("Thanh toán hóa đơn hiện tại");
+      corfimPay.showAndWait();
+    }
   }
 
   //ghi chú vào sản phẩm
@@ -290,6 +328,26 @@ public class Order_Controller {
 
   }
   public void start_workingShifts(ActionEvent event) {
+    // Lấy giờ hiện tại
+    LocalTime currentTime = LocalTime.now();
+
+    // Set thời gian của 1 ca làm
+    LocalTime start = LocalTime.of(6, 30);
+    LocalTime end = LocalTime.of(15, 0);
+
+    String shift = "";
+
+    if (!currentTime.isBefore(start) && currentTime.isBefore(end)) {
+      shift = "Sáng";
+    } else {
+      shift = "Tối";
+    }
+
+    // Hiển thị ca làm việc trên giao diện
+    txt_workshifts.setText(shift);
+    txt_workshifts.setEditable(false);
+    txt_workshifts.setMouseTransparent(true);
+    txt_workshifts.setFocusTraversable(false);
 
   }
   //thay đổi kích cỡ sản phẩm, thêm toping

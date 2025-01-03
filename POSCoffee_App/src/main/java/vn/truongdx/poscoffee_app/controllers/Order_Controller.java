@@ -310,6 +310,7 @@ public class Order_Controller {
   }
   //thanh toán hóa đơn
   public void pay_Bill(ActionEvent event) {
+    Stage Order_Stage = (Stage) btn_pay.getScene().getWindow();
     if (billList.isEmpty()) {
       Alert warning = new Alert(Alert.AlertType.WARNING);
       warning.setTitle("Cảnh báo");
@@ -320,7 +321,29 @@ public class Order_Controller {
       Alert corfimPay = new Alert(Alert.AlertType.CONFIRMATION);
       corfimPay.setTitle("Xác nhận");
       corfimPay.setHeaderText("Thanh toán hóa đơn hiện tại");
-      corfimPay.showAndWait();
+      Button btn_ok = (Button) corfimPay.getDialogPane().lookupButton(ButtonType.OK);
+      Button btn_cancel = (Button) corfimPay.getDialogPane().lookupButton(ButtonType.CANCEL);
+      if (btn_ok != null) {
+        btn_ok.setText("Thanh toán");
+      }
+      if (btn_cancel != null) {
+        btn_cancel.setText("Hủy");
+      }
+      corfimPay.showAndWait().ifPresent(respone -> {
+        if (respone == ButtonType.OK) {
+          try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/payment_page.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage payment_Stage = new Stage();
+            payment_Stage.setScene(new Scene(root));
+            Stage_Standard.removeTitleBar(payment_Stage);
+            Stage_Standard.CenterModal(Order_Stage, payment_Stage);
+            payment_Stage.showAndWait();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      });
     }
   }
 

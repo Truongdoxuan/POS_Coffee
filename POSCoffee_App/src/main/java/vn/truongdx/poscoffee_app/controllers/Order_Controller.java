@@ -96,6 +96,7 @@ public class Order_Controller {
   //hàm khởi chạy màn hình trước khi thực hiện chức năng
   @FXML
   public void initialize() {
+    start_workingShifts();
     //thiết lập các cột table view
     tc_sp.setCellValueFactory(new PropertyValueFactory<>("tenSP"));
     tc_dvi.setCellValueFactory(new PropertyValueFactory<>("donviTinh"));
@@ -334,6 +335,7 @@ public class Order_Controller {
           try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/payment_page.fxml"));
             Parent root = fxmlLoader.load();
+
             Stage payment_Stage = new Stage();
             payment_Stage.setScene(new Scene(root));
             Stage_Standard.removeTitleBar(payment_Stage);
@@ -351,7 +353,7 @@ public class Order_Controller {
   public void Voucher(ActionEvent event) {
 
   }
-  public void start_workingShifts(ActionEvent event) {
+  public void start_workingShifts() {
     // Lấy giờ hiện tại
     LocalTime currentTime = LocalTime.now();
     LocalDate currentDate = LocalDate.now();
@@ -360,31 +362,34 @@ public class Order_Controller {
     LocalTime start = LocalTime.of(6, 30);
     LocalTime end = LocalTime.of(15, 0);
 
-    String shift = "";
-
-    if (!currentTime.isBefore(start) && currentTime.isBefore(end)) {
-      shift = "Sáng";
-    } else {
-      shift = "Tối";
-    }
-
+    String shift = getShift(currentTime);
     // Hiển thị ca làm việc trên giao diện
     txt_workshifts.setText(shift);
     txt_workshifts.setEditable(false);
     txt_workshifts.setMouseTransparent(true);
     txt_workshifts.setFocusTraversable(false);
 
-    //tạo hóa đơn mới lưu trữ nó theo ca sáng tối
-    HoaDon hoaDon = new HoaDon();
-    String totalbillText = lb_totalbill.getText().trim();
-    totalbillText = totalbillText.replace(",",""); //xóa dấu ,
-    double tongTien = Double.parseDouble(totalbillText);
-    int maHoadon = hoaDon.createHoaDon(currentDate, currentTime,shift,tongTien);
+    String totalBill = lb_totalbill.getText().trim();
+    totalBill = totalBill.replace(",","");
+    double tongTien = Double.parseDouble(totalBill);
 
+    int maHoadon = Payment_Controller.createBill(currentDate,currentTime,shift,tongTien);
     if (maHoadon != -1) {
-      lb_billID.setText("POS"+maHoadon);
+      lb_billID.setText(String.valueOf(maHoadon));
+    } else {
+      System.out.println("Lỗi khi tạo mã hóa đơn.");
     }
   }
+  private String getShift(LocalTime currentTime) {
+    LocalTime start = LocalTime.of(6, 30);
+    LocalTime end = LocalTime.of(15, 0);
+    if (!currentTime.isBefore(start) && currentTime.isBefore(end)) {
+      return "Sáng";
+    } else {
+      return "Tối";
+    }
+  }
+
   //thay đổi kích cỡ sản phẩm, thêm toping
   public void change_SizeToping(ActionEvent event) {
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
@@ -443,6 +448,7 @@ public class Order_Controller {
       updateTotalBill();
     }
   }
+
   public void updateTotalBill() {
     int SL = billList.size();
     int totalSL = billList.stream()
@@ -454,6 +460,7 @@ public class Order_Controller {
 
     double discount = 0.0;
     double totalBill = 0.000;
+
     totalBill = totalTemp - discount;
 
     lb_quantity.setText(String.valueOf(totalSL));
@@ -461,4 +468,5 @@ public class Order_Controller {
     lb_coupon.setText(String.format("%.0f", discount));
     lb_totalbill.setText(String.format("%,.0f", totalBill));
   }
+
 }

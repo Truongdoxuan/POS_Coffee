@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import vn.truongdx.poscoffee_app.models.entities.HoaDon;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -18,6 +20,12 @@ public class Payment_Controller {
   Button btn_cash, btn_banking, btn_momo, btn_close, btn_confirm;
   @FXML
   StackPane contentPage;
+
+  private double totalBill;
+
+  public void setTotalBill(double totalBill) {
+    this.totalBill = totalBill;
+  }
 
   //hàm thực hiện chức năng
   @FXML
@@ -48,6 +56,20 @@ public class Payment_Controller {
     loadPane("/vn/truongdx/poscoffee_app/fxml/momo_pane.fxml");
   }
   public void Confirm(ActionEvent event) {
+    //lấy ngày giờ hiện tại
+    LocalTime currentTime = LocalTime.now();
+    LocalDate currentDate = LocalDate.now();
+
+    LocalTime start = LocalTime.of(6, 30);
+    LocalTime end = LocalTime.of(15, 0);
+
+    String shift = (currentTime.isAfter(start) && currentTime.isBefore(end))
+        ? "Sáng" : "Tối";
+
+    // Tạo hóa đơn
+    HoaDon hoaDon = new HoaDon();
+    int maHoadon = hoaDon.createHoaDon(currentDate, currentTime, shift, totalBill);
+
     Alert info = new Alert(Alert.AlertType.INFORMATION);
     info.setTitle("Thông tin");
     info.setHeaderText("Thanh toán thành công");

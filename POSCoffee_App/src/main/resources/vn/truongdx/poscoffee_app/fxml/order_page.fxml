@@ -73,7 +73,7 @@
                     <children>
                         <Label text="Tạm tính" />
                         <Region prefHeight="47.0" prefWidth="286.0" />
-                        <Label fx:id="lb_temporary" prefHeight="18.0" prefWidth="83.0" text="100,000" />
+                        <Label fx:id="lb_temporary" prefHeight="18.0" prefWidth="83.0" text="" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="173.0">

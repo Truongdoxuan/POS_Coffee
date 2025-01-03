@@ -28,6 +28,8 @@ public class HoaDon {
       }
     } catch (Exception e) {
       e.printStackTrace();
+      System.out.println("Dữ liệu cột caLamviec: " + ca);
+
     }
     //trả về mã hóa đơn mới tạo
     return mahoadon;

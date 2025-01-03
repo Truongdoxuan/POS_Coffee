@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import vn.truongdx.poscoffee_app.models.entities.HoaDon;
 import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
 import vn.truongdx.poscoffee_app.utility.Stage_Standard;
@@ -62,7 +63,7 @@ public class Order_Controller {
   @FXML
   TableColumn<SanPham_Bill, Double> tc_thanhtien;
   @FXML
-  Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill, lb_orderitems;
+  Label lb_quantity, lb_temporary, lb_coupon, lb_totalbill, lb_billID;
 
   //tạo ds rỗng lưu trữ sp dưới dạng String
   ObservableList<SanPham> sanphamList = FXCollections.observableArrayList();
@@ -349,6 +350,13 @@ public class Order_Controller {
     txt_workshifts.setMouseTransparent(true);
     txt_workshifts.setFocusTraversable(false);
 
+    //tạo hóa đơn mới lưu trữ nó theo ca sáng tối
+    HoaDon hoaDon = new HoaDon();
+    int maHoadon = hoaDon.createHoaDon(shift, currentTime);
+
+    if (maHoadon != -1) {
+      lb_billID.setText("POS"+maHoadon);
+    }
   }
   //thay đổi kích cỡ sản phẩm, thêm toping
   public void change_SizeToping(ActionEvent event) {

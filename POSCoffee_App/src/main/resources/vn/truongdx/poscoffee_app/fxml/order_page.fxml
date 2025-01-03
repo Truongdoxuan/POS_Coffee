@@ -59,7 +59,7 @@
 
                         <Label text="Đơn hàng" />
                         <Region prefHeight="47.0" prefWidth="282.0" />
-                        <Label fx:id="lb_orderitems" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="PL001" textAlignment="CENTER" />
+                        <Label fx:id="lb_billID" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="42.0" textAlignment="CENTER" />
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">

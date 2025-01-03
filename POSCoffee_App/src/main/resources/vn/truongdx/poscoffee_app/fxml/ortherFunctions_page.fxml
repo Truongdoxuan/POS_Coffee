@@ -19,8 +19,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
           <children>
-              <Button fx:id="btn_endShifts" mnemonicParsing="false" onAction="#end_Shifts" prefHeight="60.0" prefWidth="130.0" text="Kết thúc ca" />
-              <Button fx:id="btn_endDay" mnemonicParsing="false" onAction="#end_Day" prefHeight="60.0" prefWidth="130.0" text="Kết thúc ngày" GridPane.columnIndex="1" />
+              <Button fx:id="btn_endShifts" mnemonicParsing="false" onAction="#end_Shifts" prefHeight="60.0" prefWidth="130.0" text="Danh mục sản phẩm" />
+              <Button fx:id="btn_endDay" mnemonicParsing="false" onAction="#end_Day" prefHeight="60.0" prefWidth="130.0" text="Xem nhân sự" GridPane.columnIndex="1" />
               <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#Logout" prefHeight="60.0" prefWidth="130.0" text="Đăng xuất POS" GridPane.columnIndex="2" />
               <Button fx:id="btn_close" mnemonicParsing="false" onAction="#close_Modal" prefHeight="60.0" prefWidth="130.0" text="Đóng" GridPane.columnIndex="3" />
           </children>

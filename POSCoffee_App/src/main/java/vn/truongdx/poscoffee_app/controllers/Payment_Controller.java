@@ -1,5 +1,6 @@
 package vn.truongdx.poscoffee_app.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import vn.truongdx.poscoffee_app.models.entities.HoaDon;
+import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
+import vn.truongdx.poscoffee_app.utils.DataStorage;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,16 +23,13 @@ public class Payment_Controller {
   Button btn_cash, btn_banking, btn_momo, btn_close, btn_confirm;
   @FXML
   StackPane contentPage;
-
   private double totalBill;
 
-  public void setTotalBill(double totalBill) {
-    this.totalBill = totalBill;
-  }
 
   //hàm thực hiện chức năng
   @FXML
   public void initialize() {
+    this.totalBill = DataStorage.getTotalBill();
     loadPane_Cash();
   }
   public void loadPane(String fxmlFile) {

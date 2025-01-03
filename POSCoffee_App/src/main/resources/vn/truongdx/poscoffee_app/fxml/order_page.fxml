@@ -45,7 +45,7 @@
                     <Button fx:id="btn_voucher" mnemonicParsing="false" onAction="#Voucher" prefHeight="60.0" prefWidth="130.0" text="Voucher" GridPane.rowIndex="2" />
                     <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#delete_Item" prefHeight="60.0" prefWidth="130.0" text="Xóa" GridPane.columnIndex="1" />
                     <Button fx:id="btn_changesl" mnemonicParsing="false" onAction="#changeSL" prefHeight="60.0" prefWidth="130.0" text="Đổi số lượng" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Button fx:id="btn_startshift" mnemonicParsing="false" onAction="#start_workingShifts" prefHeight="60.0" prefWidth="130.0" text="Bắt đầu ca" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button fx:id="btn_startshift" mnemonicParsing="false" onAction="#start_workingShifts" prefHeight="60.0" prefWidth="130.0" text="Xem lịch làm" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancel_Bill" prefHeight="60.0" prefWidth="130.0" text="Hủy giao dịch" GridPane.columnIndex="2" />
                     <Button fx:id="btn_orther" mnemonicParsing="false" onAction="#orther_Functions" prefHeight="60.0" prefWidth="130.0" text="Chức năng khác" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                     <Button fx:id="btn_report" mnemonicParsing="false" onAction="#fast_Report" prefHeight="60.0" prefWidth="130.0" text="Báo cáo nhanh" GridPane.columnIndex="2" GridPane.rowIndex="2" />

@@ -2,28 +2,25 @@ package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import vn.truongdx.poscoffee_app.models.entities.HoaDon;
+import vn.truongdx.poscoffee_app.controllers_modal.CashPane_Controller;
 import vn.truongdx.poscoffee_app.models.entities.SanPham;
 import vn.truongdx.poscoffee_app.models.entities.SanPham_Bill;
 import vn.truongdx.poscoffee_app.utility.Stage_Standard;
+import vn.truongdx.poscoffee_app.utils.DataStorage;
 import vn.truongdx.poscoffee_app.utils.DatabaseConnection;
 
 import java.io.IOException;
@@ -333,15 +330,16 @@ public class Order_Controller {
       corfimPay.showAndWait().ifPresent(respone -> {
         if (respone == ButtonType.OK) {
           try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/payment_page.fxml"));
-            Parent root = fxmlLoader.load();
-
-            //lấy controller của payment
-            Payment_Controller paymentController = fxmlLoader.getController();
+            //lấy thông tin hóa đơn tổng tiền
             String totalBillText = lb_totalbill.getText().trim();
             totalBillText = totalBillText.replace(",","");
             double totalBill = Double.parseDouble(totalBillText);
-            paymentController.setTotalBill(totalBill);
+
+            //lưu dữ liệu vào kho
+            DataStorage.setTotalBill(totalBill);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/payment_page.fxml"));
+            Parent root = fxmlLoader.load();
 
             Stage payment_Stage = new Stage();
             payment_Stage.setScene(new Scene(root));
@@ -458,9 +456,4 @@ public class Order_Controller {
     lb_totalbill.setText(String.format("%,.0f", totalBill));
   }
 
-  public double getTotalBill() {
-    String totalbill = lb_totalbill.getText().trim();
-    totalbill = totalbill.replace(",","");
-    return Double.parseDouble(totalbill);
-  }
 }

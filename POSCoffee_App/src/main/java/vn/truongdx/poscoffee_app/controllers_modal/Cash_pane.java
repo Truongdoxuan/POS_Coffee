@@ -1,4 +1,4 @@
-package vn.truongdx.poscoffee_app.controllers;
+package vn.truongdx.poscoffee_app.controllers_modal;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,9 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.Stack;
-
-public class Cash_payment_Controller {
+public class Cash_pane {
   //khai báo biến
   @FXML
   TextField txt_totalbill, txt_cashSend, txt_cashResend;

@@ -40,7 +40,7 @@ public class Order_Controller {
   @FXML
   TextField txt_searchItem;
   @FXML
-  Button btn_orther, btn_topingsize, btn_changesl, btn_pay;
+  Button btn_orther, btn_topingsize, btn_changesl, btn_pay, btn_report;
   @FXML
   TableView<SanPham> tb_sanpham;
   @FXML
@@ -304,7 +304,20 @@ public class Order_Controller {
   }
   //báo cáo nhanh
   public void fast_Report(ActionEvent event) {
+    Stage Order_Stage = (Stage) btn_report.getScene().getWindow();
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/reportDoanhThu_page.fxml"));
+      Parent root = fxmlLoader.load();
+      Stage reportStage = new Stage();
+      reportStage.setScene(new Scene(root));
+      Stage_Standard.removeTitleBar(reportStage);
 
+      // Căn giữa cửa sổ modal trong cửa sổ chính
+      Stage_Standard.CenterModal(Order_Stage, reportStage);
+      reportStage.showAndWait();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
   //thanh toán hóa đơn
   public void pay_Bill(ActionEvent event) {

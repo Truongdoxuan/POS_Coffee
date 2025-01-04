@@ -2,6 +2,7 @@ package vn.truongdx.poscoffee_app.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -150,7 +151,10 @@ public class Order_Controller {
     //đặt dữ liệu từ csdl vào listview
     sanphamList = getSanPhamFromDataBase();
     tb_sanpham.setItems(sanphamList);
-
+    // Lắng nghe sự kiện thay đổi văn bản trong TextField
+    Platform.runLater(() -> {
+      txt_searchItem.requestFocus(); //đặt con trỏ chuột vào textfield khi bắt đầu
+    });
     //lấy ngày giờ hiện tại
     LocalDate currentDate = LocalDate.now();
     //định dạng
@@ -174,7 +178,13 @@ public class Order_Controller {
 
     //mã cửa hàng và mã version (tự đặt)
     txt_poscode.setText("POS001");
+    txt_poscode.setEditable(false);
+    txt_poscode.setMouseTransparent(true);
+    txt_poscode.setFocusTraversable(false);
     txt_version.setText("V1.0.0");
+    txt_version.setEditable(false);
+    txt_version.setMouseTransparent(true);
+    txt_version.setFocusTraversable(false);
 
     txt_searchItem.textProperty().addListener((observable, oldValue, newValue) -> {
       timkiemSP(newValue);
@@ -351,8 +361,11 @@ public class Order_Controller {
             //lưu dữ liệu vào kho
             DataStorage.setTotalBill(totalBill);
 
+            DataStorage.setTotalBill(totalBill);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vn/truongdx/poscoffee_app/fxml/payment_page.fxml"));
             Parent root = fxmlLoader.load();
+            Payment_Controller paymentController = fxmlLoader.getController();
+            paymentController.setOrderController(this);
 
             Stage payment_Stage = new Stage();
             payment_Stage.setScene(new Scene(root));
@@ -468,5 +481,8 @@ public class Order_Controller {
     lb_coupon.setText(String.format("%.0f", discount));
     lb_totalbill.setText(String.format("%,.0f", totalBill));
   }
-
+  public void cleanBillAfterUpdate() {
+    billList.clear();
+    updateTotalBill();
+  }
 }

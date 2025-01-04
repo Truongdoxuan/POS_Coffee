@@ -19,9 +19,7 @@
     <ComboBox fx:id="filterComboBox" promptText="Chọn theo">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Ca" />
                 <String fx:value="Ngày" />
-                <String fx:value="Tuần" />
                 <String fx:value="Tháng" />
             </FXCollections>
         </items>

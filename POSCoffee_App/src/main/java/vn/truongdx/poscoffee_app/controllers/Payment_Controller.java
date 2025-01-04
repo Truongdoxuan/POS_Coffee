@@ -24,6 +24,24 @@ public class Payment_Controller {
   @FXML
   StackPane contentPage;
   private double totalBill;
+  private static Payment_Controller instance;
+  private Order_Controller orderController;
+
+  public Payment_Controller() {
+    instance = this;
+  }
+
+  public static Payment_Controller getInstance() {
+    return instance;
+  }
+
+  public void setOrderController(Order_Controller orderController) {
+    this.orderController = orderController;
+  }
+
+  public Order_Controller getOrderController() {
+    return orderController;
+  }
 
 
   //hàm thực hiện chức năng
@@ -76,6 +94,7 @@ public class Payment_Controller {
     info.showAndWait().ifPresent(respone -> {
       if (respone == ButtonType.OK) {
         Stage stage = (Stage) btn_close.getScene().getWindow();
+        Payment_Controller.getInstance().getOrderController().cleanBillAfterUpdate();
         stage.close();
       }
     });

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.TopingSize_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.TopingSize_Controller">
    <children>
       <Label layoutX="69.0" layoutY="40.0" text="Kích thước">
          <font>
@@ -53,8 +53,8 @@
       <RadioButton fx:id="rd_itngot" layoutX="362.0" layoutY="343.0" mnemonicParsing="false" text="Ít" />
       <ButtonBar layoutX="301.0" layoutY="388.0" prefHeight="40.0" prefWidth="243.0">
          <buttons>
-            <Button fx:id="btn_add" mnemonicParsing="false" onAction="#addintoBill" prefHeight="26.0" prefWidth="108.0" text="Thêm vào bill" />
-            <Button fx:id="btn_close" mnemonicParsing="false" onAction="#closeModal" text="Đóng" />
+            <Button fx:id="btn_add" mnemonicParsing="false" onAction="#addintoBill" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #20D374;" text="Thêm vào bill" />
+            <Button fx:id="btn_close" mnemonicParsing="false" onAction="#closeModal" style="-fx-background-color: #FF5C5D;" text="Đóng" />
          </buttons>
       </ButtonBar>
       <Label layoutX="69.0" layoutY="399.0" text="Số lượng">

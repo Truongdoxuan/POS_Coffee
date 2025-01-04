@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="698.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Order_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="698.0" prefWidth="1056.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Order_Controller">
     <children>
         <Label layoutX="14.0" layoutY="5.0" text="Ngày KD" />
         <TextField fx:id="txt_dayKD" layoutX="12.0" layoutY="21.0" prefHeight="26.0" prefWidth="102.0" />
@@ -43,15 +43,15 @@
                     <Button fx:id="btn_topingsize" mnemonicParsing="false" onAction="#change_SizeToping" prefHeight="60.0" prefWidth="130.0" text="Toping, size" />
                     <Button fx:id="btn_fastAdd" mnemonicParsing="false" onAction="#fastAddintoBill" prefHeight="60.0" prefWidth="130.0" text="Thêm nhanh" GridPane.rowIndex="1" />
                     <Button fx:id="btn_voucher" mnemonicParsing="false" onAction="#Voucher" prefHeight="60.0" prefWidth="130.0" text="Voucher" GridPane.rowIndex="2" />
-                    <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#delete_Item" prefHeight="60.0" prefWidth="130.0" text="Xóa" GridPane.columnIndex="1" />
+                    <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#delete_Item" prefHeight="60.0" prefWidth="130.0" style="-fx-background-color: #FF5C5D;" text="Xóa" GridPane.columnIndex="1" />
                     <Button fx:id="btn_changesl" mnemonicParsing="false" onAction="#changeSL" prefHeight="60.0" prefWidth="130.0" text="Đổi số lượng" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Button fx:id="btn_startshift" mnemonicParsing="false" onAction="#start_workingShifts" prefHeight="60.0" prefWidth="130.0" text="Xem lịch làm" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancel_Bill" prefHeight="60.0" prefWidth="130.0" text="Hủy giao dịch" GridPane.columnIndex="2" />
+                    <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancel_Bill" prefHeight="60.0" prefWidth="130.0" style="-fx-background-color: #FF5C5D;" text="Hủy giao dịch" GridPane.columnIndex="2" />
                     <Button fx:id="btn_orther" mnemonicParsing="false" onAction="#orther_Functions" prefHeight="60.0" prefWidth="130.0" text="Chức năng khác" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                     <Button fx:id="btn_report" mnemonicParsing="false" onAction="#fast_Report" prefHeight="60.0" prefWidth="130.0" text="Báo cáo nhanh" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                 </children>
         </GridPane>
-        <Button fx:id="btn_pay" layoutX="912.0" layoutY="441.0" mnemonicParsing="false" onAction="#pay_Bill" prefHeight="218.0" prefWidth="114.0" text="Thanh toán" />
+        <Button fx:id="btn_pay" layoutX="912.0" layoutY="441.0" mnemonicParsing="false" onAction="#pay_Bill" prefHeight="218.0" prefWidth="114.0" style="-fx-background-color: #20D374;" text="Thanh toán" />
         <VBox fx:id="vb_tinhbill" layoutX="16.0" layoutY="446.0" prefHeight="235.0" prefWidth="416.0">
             <children>
                 <HBox prefHeight="100.0" prefWidth="274.0">

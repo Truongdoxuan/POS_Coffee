@@ -8,7 +8,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="322.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers_modal.CashPane_Controller">
     <children>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="322.0">
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="322.0" style="-fx-background-color: #FFFFFF;">
             <Text layoutX="30.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Khách đưa">
                 <font>
                     <Font name="System Bold" size="12.0" />

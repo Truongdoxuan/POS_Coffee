@@ -3,25 +3,44 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.PasswordField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Login_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.truongdx.poscoffee_app.controllers.Login_Controller">
     <children>
+      <ImageView fitHeight="131.0" fitWidth="255.0" layoutX="430.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/logo_POS2.png" />
+         </image>
+      </ImageView>
         <Text fill="#0eae41" layoutX="186.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trang đăng nhập hệ thống" textAlignment="CENTER">
             <font>
                 <Font name="Times New Roman Bold" size="20.0" />
             </font>
         </Text>
-        <TextField fx:id="txt_maCH" layoutX="194.0" layoutY="163.0" prefHeight="26.0" prefWidth="228.0" />
-        <PasswordField fx:id="txt_matkhau" layoutX="194.0" layoutY="229.0" prefHeight="26.0" prefWidth="228.0" />
+        <TextField fx:id="txt_maCH" layoutX="187.0" layoutY="163.0" prefHeight="26.0" prefWidth="228.0" />
+        <PasswordField fx:id="txt_matkhau" layoutX="187.0" layoutY="229.0" prefHeight="26.0" prefWidth="228.0" />
         <TextField fx:id="txt_matkhauVis" layoutX="194.0" layoutY="229.0" prefHeight="26.0" prefWidth="228.0" visible="false" />
-        <Label layoutX="113.0" layoutY="166.0" text="Mã số CH" textFill="#0eae41" />
-        <Label layoutX="114.0" layoutY="233.0" text="Mật khẩu" textFill="#0eae41" />
-        <Button fx:id="btn_login" layoutX="260.0" layoutY="323.0" mnemonicParsing="false" onAction="#Login" text="Đăng nhập" textFill="#10ad42" />
-      <CheckBox fx:id="cb_showpass" layoutX="194.0" layoutY="274.0" mnemonicParsing="false" onAction="#ShowPassword" text="Hiện mật khẩu" textFill="#10ad42" />
+        <Label layoutX="106.0" layoutY="166.0" text="Mã số CH" textFill="#0eae41">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label layoutX="107.0" layoutY="233.0" text="Mật khẩu" textFill="#0eae41">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Button fx:id="btn_login" layoutX="260.0" layoutY="326.0" mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #20D374;" text="Đăng nhập" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <CheckBox fx:id="cb_showpass" layoutX="187.0" layoutY="274.0" mnemonicParsing="false" onAction="#ShowPassword" text="Hiện mật khẩu" textFill="#10ad42">
+         <font>
+            <Font size="13.0" />
+         </font></CheckBox>
     </children>
 </AnchorPane>

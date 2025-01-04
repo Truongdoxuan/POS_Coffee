@@ -27,6 +27,8 @@ public class BaoCao {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMaHoaDon(rs.getInt("maHoadon"));
         hoaDon.setNgayHoaDon(rs.getDate("ngayLap"));
+        hoaDon.setTimeHoaDon(rs.getTime("gioLap"));
+        hoaDon.setCaLamviec(rs.getString("caLamviec"));
         hoaDon.setTongTien(rs.getDouble("tongTien"));
         reportList.add(hoaDon);
       }
@@ -35,6 +37,24 @@ public class BaoCao {
     }
     return reportList;
   }
+
+  // Phương thức mới để tính tổng doanh thu
+  public double getTotalRevenueByDate(String date) {
+    double totalRevenue = 0.0;
+    String query = "SELECT SUM(tongTien) as total FROM hoadon WHERE DATE(ngayLap) = ?";
+    try {
+      PreparedStatement pstmt = conn.prepareStatement(query);
+      pstmt.setString(1, date);
+      ResultSet rs = pstmt.executeQuery();
+      if (rs.next()) {
+        totalRevenue = rs.getDouble("total");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return totalRevenue;
+  }
+
 
   // Phương thức lấy báo cáo doanh thu theo tháng
   public ObservableList<HoaDon> MonthlyReport(int monthNumber) {
@@ -51,15 +71,34 @@ public class BaoCao {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMaHoaDon(rs.getInt("maHoadon"));
         hoaDon.setNgayHoaDon(rs.getDate("ngayLap"));
+        hoaDon.setTimeHoaDon(rs.getTime("gioLap"));
+        hoaDon.setCaLamviec(rs.getString("caLamviec"));
         hoaDon.setTongTien(rs.getDouble("tongTien"));
         reportList.add(hoaDon);
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
     return reportList;
   }
+
+  // Phương thức tính tổng doanh thu theo tháng
+  public double getTotalRevenueByMonth(int monthNumber) {
+    double totalRevenue = 0.0;
+    String query = "SELECT SUM(tongTien) as total FROM hoadon WHERE MONTH(ngayLap) = ?";
+    try {
+      PreparedStatement pstmt = conn.prepareStatement(query);
+      pstmt.setInt(1, monthNumber);
+      ResultSet rs = pstmt.executeQuery();
+      if (rs.next()) {
+        totalRevenue = rs.getDouble("total");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return totalRevenue;
+  }
+
 
   // Phương thức lấy báo cáo doanh thu theo ca
   public ObservableList<HoaDon> ShiftReport(String shift) {
@@ -76,6 +115,8 @@ public class BaoCao {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMaHoaDon(rs.getInt("maHoadon"));
         hoaDon.setNgayHoaDon(rs.getDate("ngayLap"));
+        hoaDon.setTimeHoaDon(rs.getTime("gioLap"));
+        hoaDon.setCaLamviec(rs.getString("caLamviec"));
         hoaDon.setTongTien(rs.getDouble("tongTien"));
         reportList.add(hoaDon);
       }

@@ -10,6 +10,7 @@ import java.time.LocalTime;
 public class HoaDon {
   private IntegerProperty maHoaDon;
   private ObjectProperty<Date> ngayHoaDon;
+  private ObjectProperty<Time> timeHoaDon;
   private DoubleProperty tongTien;
   private StringProperty caLamviec;
 
@@ -18,16 +19,44 @@ public class HoaDon {
     this.ngayHoaDon = new SimpleObjectProperty<>();
     this.tongTien = new SimpleDoubleProperty();
     this.caLamviec = new SimpleStringProperty();
+    this.timeHoaDon = new SimpleObjectProperty<>();
+  }
+
+  public Time getTimeHoaDon() {
+    return timeHoaDon.get();
+  }
+
+  public ObjectProperty<Time> timeHoaDonProperty() {
+    return timeHoaDon;
+  }
+
+  public void setTimeHoaDon(Time timeHoaDon) {
+    this.timeHoaDon.set(timeHoaDon);
   }
 
   public StringProperty caLamviecProperty() {
     return caLamviec;
   }
 
+  public String getCaLamviec() {
+    return caLamviec.get();
+  }
+
+  public void setCaLamviec(String caLamviec) {
+    this.caLamviec.set(caLamviec);
+  }
+
   public DoubleProperty tongTienProperty() {
     return tongTien;
   }
 
+  public int getMaHoaDon() {
+    return maHoaDon.get();
+  }
+
+  public IntegerProperty maHoaDonProperty() {
+    return maHoaDon;
+  }
 
   public void setMaHoaDon(int maHoaDon) {
     this.maHoaDon.set(maHoaDon);

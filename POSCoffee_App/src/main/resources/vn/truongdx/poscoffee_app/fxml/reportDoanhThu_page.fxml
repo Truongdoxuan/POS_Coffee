@@ -37,9 +37,11 @@
 
     <TableView fx:id="tb_report" prefWidth="500.0">
       <columns>
-         <TableColumn fx:id="columnDate" prefWidth="168.79999387264252" text="Ngày lập" />
-         <TableColumn fx:id="columnShift" minWidth="0.0" prefWidth="100.7999267578125" text="Ca" />
-         <TableColumn fx:id="columnRevenue" minWidth="0.0" prefWidth="228.00006103515625" text="Doanh thu" />
+         <TableColumn fx:id="columnMaHD" prefWidth="95.20001220703125" text="Mã hóa đơn" />
+         <TableColumn fx:id="columnDate" prefWidth="104.80001527070999" text="Ngày lập" />
+         <TableColumn fx:id="columnTime" prefWidth="104.0" text="Giờ lập" />
+         <TableColumn fx:id="columnShift" minWidth="0.0" prefWidth="77.5999755859375" text="Ca" />
+         <TableColumn fx:id="columnRevenue" minWidth="0.0" prefWidth="115.20001220703125" text="Số tiền" />
       </columns>
     </TableView>
    <HBox prefHeight="100.0" prefWidth="200.0">
@@ -47,9 +49,9 @@
          <Region prefHeight="36.0" prefWidth="52.0" />
          <Label prefHeight="28.0" prefWidth="93.0" text="Tổng doanh thu" />
          <Region prefHeight="36.0" prefWidth="18.0" />
-         <TextField prefHeight="27.0" prefWidth="198.0" />
+         <TextField fx:id="txt_sum" prefHeight="27.0" prefWidth="198.0" />
          <Region prefHeight="36.0" prefWidth="51.0" />
-         <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng" />
+         <Button fx:id="btn_close" mnemonicParsing="false" onAction="#Close_Modal" prefHeight="27.0" prefWidth="67.0" text="Đóng" />
       </children>
    </HBox>
 </VBox>

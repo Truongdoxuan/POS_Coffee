@@ -5,29 +5,38 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import vn.truongdx.poscoffee_app.models.entities.BaoCao;
 import vn.truongdx.poscoffee_app.models.entities.HoaDon;
+import vn.truongdx.poscoffee_app.models.entities.SanPham;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DecimalFormat;
 
 public class ReportDoanhThu_Controller {
 
   @FXML
   private ComboBox<String> filterComboBox;
   @FXML
-  private TextField dateTextField, monthTextField;
+  private Button btn_close;
+  @FXML
+  private TextField dateTextField, monthTextField, txt_sum;
   @FXML
   private TableView<HoaDon> tb_report;
   @FXML
+  private TableColumn<HoaDon, String> columnMaHD;
+  @FXML
   private TableColumn<HoaDon, String> columnDate;
+  @FXML
+  private TableColumn<HoaDon, String> columnTime;
   @FXML
   private TableColumn<HoaDon, String> columnShift;
   @FXML
   private TableColumn<HoaDon, Double> columnRevenue;
+
+  private BaoCao baoCao = new BaoCao();
 
   @FXML
   public void initialize() {
@@ -49,14 +58,35 @@ public class ReportDoanhThu_Controller {
       }
     });
 
+    columnMaHD.setCellValueFactory(cellData -> {
+      Integer maHD = cellData.getValue().getMaHoaDon();
+      return new SimpleStringProperty(maHD != null ? maHD.toString() : "");
+    });
     columnDate.setCellValueFactory(cellData -> {
       Date date = cellData.getValue().getNgayHoaDon();
       return new SimpleStringProperty(date != null ? date.toString() : "");
+    });
+    columnTime.setCellValueFactory(cellData -> {
+      Time time = cellData.getValue().getTimeHoaDon();
+      return new SimpleStringProperty(time != null ? time.toString() : "");
     });
     columnShift.setCellValueFactory(cellData ->
         new SimpleStringProperty(cellData.getValue().caLamviecProperty().get())
     );
     columnRevenue.setCellValueFactory(cellData -> cellData.getValue().tongTienProperty().asObject());
+    columnRevenue.setCellFactory(col -> new TableCell<HoaDon, Double>(){
+      @Override
+      protected void updateItem(Double item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty || item == null) {
+          setText(null);
+        } else {
+          // Sử dụng DecimalFormat để thêm dấu phân cách mỗi 3 chữ số
+          DecimalFormat format = new DecimalFormat("#,###");
+          setText(format.format(item));  // Hiển thị giá trị với dấu phân cách
+        }
+      }
+    });
   }
 
   @FXML
@@ -74,23 +104,35 @@ public class ReportDoanhThu_Controller {
     }
 
     if (filterValue != null && !filterValue.isEmpty()) {
-      BaoCao baoCao = new BaoCao();
       ObservableList<HoaDon> reportList = FXCollections.observableArrayList();
 
       if ("Ngày".equals(filterType)) {
         reportList.addAll(baoCao.DailyReport(filterValue));
+        totalDay(filterValue); //cập nhật doanh thu ngày
       }
       else if ("Tháng".equals(filterType)) {
-        reportList.addAll(baoCao.MonthlyReport(Integer.parseInt(filterValue)));
-      }
-      System.out.println("Filter Value: " + filterValue);
-      System.out.println("Report List Size: " + reportList.size());
-      for (HoaDon hoaDon : reportList) {
-        System.out.println(hoaDon.getNgayHoaDon() + " - " + hoaDon.caLamviecProperty().get() + " - " + hoaDon.tongTienProperty().get());
+        int month = Integer.parseInt(filterValue); // Chuyển đổi filterValue thành kiểu int
+        reportList.addAll(baoCao.MonthlyReport(month));
+        totalMonth(month); // Cập nhật doanh thu tháng
       }
       tb_report.setItems(reportList);
     } else {
       System.out.println("Vui lòng nhập giá trị cho bộ lọc");
     }
+  }
+
+  public void totalDay(String date) {
+    double totalRevenue = baoCao.getTotalRevenueByDate(date);
+    DecimalFormat format = new DecimalFormat("#,###");
+    txt_sum.setText(format.format(totalRevenue));
+  }
+  public void totalMonth(int month) {
+    double totalRevenue = baoCao.getTotalRevenueByMonth(month);
+    DecimalFormat format = new DecimalFormat("#,###");
+    txt_sum.setText(format.format(totalRevenue));
+  }
+  public void Close_Modal() {
+    Stage stage = (Stage) btn_close.getScene().getWindow();
+    stage.close();
   }
 }

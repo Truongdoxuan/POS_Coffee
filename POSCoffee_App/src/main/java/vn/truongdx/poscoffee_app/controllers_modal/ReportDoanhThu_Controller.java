@@ -40,7 +40,7 @@ public class ReportDoanhThu_Controller {
 
   @FXML
   public void initialize() {
-    filterComboBox.getSelectionModel().select(0);
+    filterComboBox.getSelectionModel().select("Chọn theo");
     filterComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       switch (newValue) {
         case "Ngày":

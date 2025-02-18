@@ -17,10 +17,16 @@ public class OrtherFunction_Controller {
   Button btn_logout, btn_close;
   //hàm thực hiện chức năng
   public void end_Shifts(ActionEvent event) {
-
+    Alert warning = new Alert(Alert.AlertType.INFORMATION);
+    warning.setTitle("Thông tin");
+    warning.setHeaderText("Chức năng sớm được cập nhật ");
+    warning.showAndWait();
   }
   public void end_Day(ActionEvent event) {
-
+    Alert warning = new Alert(Alert.AlertType.INFORMATION);
+    warning.setTitle("Thông tin");
+    warning.setHeaderText("Chức năng sớm được cập nhật ");
+    warning.showAndWait();
   }
   public void Logout(ActionEvent event) {
     Alert confirmLogout = new Alert(Alert.AlertType.CONFIRMATION);

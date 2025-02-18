@@ -382,7 +382,16 @@ public class Order_Controller {
 
   //ghi chú vào sản phẩm
   public void Voucher(ActionEvent event) {
-
+    Alert warning = new Alert(Alert.AlertType.INFORMATION);
+    warning.setTitle("Thông tin");
+    warning.setHeaderText("Chức năng sớm được cập nhật ");
+    warning.showAndWait();
+  }
+  public void Grab() {
+    Alert warning = new Alert(Alert.AlertType.INFORMATION);
+    warning.setTitle("Thông tin");
+    warning.setHeaderText("Chức năng sớm được cập nhật ");
+    warning.showAndWait();
   }
   public void start_workingShifts() {
     // Lấy giờ hiện tại
@@ -446,21 +455,30 @@ public class Order_Controller {
   }
 
   public void fastAddintoBill(ActionEvent event) {
+    // Lấy sản phẩm được chọn
     SanPham selectedSP = tb_sanpham.getSelectionModel().getSelectedItem();
-    String tensp = tb_sanpham.getSelectionModel().getSelectedItem().getTenSP();
-    Double giasp = tb_sanpham.getSelectionModel().getSelectedItem().getGiaSP();
+
     if (selectedSP == null) {
+      // Hiển thị cảnh báo nếu chưa chọn sản phẩm
       Alert warning = new Alert(Alert.AlertType.WARNING);
       warning.setTitle("Cảnh báo");
       warning.setHeaderText("Vui lòng chọn sản phẩm trước");
       warning.showAndWait();
     } else {
-      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp,null,null,null,null,null,1,giasp,giasp);
+      // Truy cập thông tin sản phẩm sau khi đã kiểm tra null
+      String tensp = selectedSP.getTenSP();
+      Double giasp = selectedSP.getGiaSP();
+
+      // Tạo đối tượng SanPham_Bill và thêm vào danh sách
+      SanPham_Bill sanPhamBill = new SanPham_Bill(tensp, null, null, null, null, null, 1, giasp, giasp);
       billList.add(sanPhamBill);
+
+      // Cập nhật TableView và tổng hóa đơn
       tb_bill.setItems(billList);
       updateTotalBill();
     }
   }
+
 
   public void updateTotalBill() {
     int SL = billList.size();
